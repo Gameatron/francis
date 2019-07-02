@@ -11,6 +11,7 @@ class Immigration(commands.Cog):
         await ctx.channel.purge(limit=amount)
 
     @commands.command()
+    @commands.has_permissions(administrator=True)
     async def accept(self, ctx, user: discord.Member):
         await ctx.message.delete()
         role = discget(ctx.guild.roles, name="Bewohner")
@@ -21,6 +22,7 @@ class Immigration(commands.Cog):
         await ctx.send(f"{user.mention} accepted.", delete_after=3)
 
     @commands.command()
+    @commands.has_permissions(administrator=True)
     async def deny(self, ctx, user: discord.Member):
         await self.clear(ctx, 2)
         await ctx.send(f"{user.mention} denied.", delete_after=3)

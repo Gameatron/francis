@@ -2,6 +2,7 @@ import discord
 from discord.ext import commands
 from discord.utils import get as discget
 
+
 class Utils(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
@@ -21,13 +22,15 @@ class Utils(commands.Cog):
             em.add_field(name='Messages Cleared:', value=amount)
         channel = discget(ctx.guild.channels, name="mod-log")
         await channel.send(embed=em)
-    
+
     @commands.command(aliases=('purge', 'clean', 'clear'))
+    @commands.has_permissions(delete_messages=True)
     async def _clear(self, ctx, amount: int):
         await ctx.message.delete()
         await self.clear(ctx, amount)
         await ctx.send(f"Cleared {amount} messages!", delete_after=5)
         await self.mod_message(ctx, ctx.author, 'Deletion', amount, reason=None)
+
 
 def setup(bot):
     bot.add_cog(Utils(bot))

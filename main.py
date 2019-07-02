@@ -9,7 +9,7 @@ with open("token.json", 'r') as f:
 bot = commands.Bot(command_prefix=">",
                    description="franz bot")
 # List of cogs
-cogs = ('immigration', 'prison', 'utils', 'shop')
+cogs = ('immigration', 'prison', 'utils', 'events')
 
 # Loads the list of cogs
 if __name__ == "__main__":
