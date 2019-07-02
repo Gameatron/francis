@@ -24,7 +24,7 @@ class Utils(commands.Cog):
         await channel.send(embed=em)
 
     @commands.command(aliases=('purge', 'clean', 'clear'))
-    @commands.has_permissions(delete_messages=True)
+    @commands.has_permissions(manage_messages=True)
     async def _clear(self, ctx, amount: int):
         await ctx.message.delete()
         await self.clear(ctx, amount)
