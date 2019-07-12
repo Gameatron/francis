@@ -1,11 +1,11 @@
 # IMPORTS #
 import discord
 from discord.ext import commands
-import json
+import os
+import dotenv
 
-# Grabs the token from token.json
-with open("token.json", 'r') as f:
-    token = json.load(f)['TOKEN']
+dotenv.load_dotenv()
+token = os.environ.get('TOKEN')
 bot = commands.Bot(command_prefix=">",
                    description="franz bot")
 # List of cogs

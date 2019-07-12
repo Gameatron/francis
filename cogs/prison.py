@@ -4,10 +4,11 @@ from discord.utils import get as discget
 import os
 import psycopg2
 import json
+import dotenv
+dotenv.load_dotenv()
 
-with open("token.json", 'r') as f:
-    DATABASE_URL = json.load(f)['DATABASE_URL']
-conn = psycopg2.connect(DATABASE_URL, sslmode='require')
+token = os.environ.get('TOKEN')
+conn = psycopg2.connect(os.getenv("DATABASE_URL"), sslmode='require')
 c = conn.cursor()
 
 
