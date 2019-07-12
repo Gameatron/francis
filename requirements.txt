@@ -4,3 +4,4 @@ youtube_dl
 asyncpg
 googletrans
 psycopg2
+dotenv
