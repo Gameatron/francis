@@ -15,7 +15,7 @@ c = conn.cursor()
 class Prison(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
-        self.free_roles = ('Einwanderer', 'Watchlist')
+        self.free_roles = ('Immigrant', 'Watchlist')
 
     @commands.command()
     @commands.has_permissions(administrator=True)
@@ -27,11 +27,11 @@ class Prison(commands.Cog):
                 await user.remove_roles(role)
             except:
                 pass
-        role = discget(ctx.guild.roles, name="Gefangener")
+        role = discget(ctx.guild.roles, name="Prisoner")
         await user.add_roles(role)
         await ctx.send(f"{user.name} has been imprisoned.", delete_after=5)
         channel = discget(ctx.guild.channels, name='prison-block')
-        await channel.send(f"Welcome to prison, {user.mention}. Please see your way over to <#594420084529954848> when you are ready to leave.")
+        await channel.send(f"Welcome to prison, {user.mention}. Please see your way over to <#599545935172993035> when you are ready to leave.")
         conn.commit()
 
     @commands.command()
@@ -39,7 +39,7 @@ class Prison(commands.Cog):
     async def free(self, ctx, user: discord.Member):
         await ctx.message.delete()
         c.execute(f"UPDATE users SET prison = 'False' WHERE user_id = {user.id};")
-        role = discget(ctx.guild.roles, name="Gefangener")
+        role = discget(ctx.guild.roles, name="Prisoner")
         await user.remove_roles(role)
         for role in self.free_roles:
             role = discget(ctx.guild.roles, name=role)

@@ -24,6 +24,7 @@ class Events(commands.Cog):
     
     @commands.Cog.listener()
     async def on_member_join(self, ctx):
+        channel = get(ctx.guild.channels, name="entry-exit")
         c.execute(f"SELECT * FROM users WHERE user_id = {ctx.id};")
         rows = c.fetchall()
         if rows == []:
@@ -33,9 +34,18 @@ class Events(commands.Cog):
         if 'True ' in rows[0]:
             await asyncio.sleep(1)
             await self.remove_all_roles(ctx)
-            role = get(ctx.guild.roles, name='Gefangener')
+            role = get(ctx.guild.roles, name='Prisoner')
             await ctx.add_roles(role)
+        else:
+            await channel.send(f"{ctx.mention} has joined.")
+            role = get(ctx.guild.roles, name="Immigrant")
+            ctx.add_roles(role)
         conn.commit()
+    
+    @commands.Cog.listener()
+    async def on_member_remove(self, ctx):
+        channel = get(ctx.guild.channels, name="entry-exit")
+        await channel.send(f"{ctx.name} has left.")
 
 
 def setup(bot):

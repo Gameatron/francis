@@ -9,7 +9,7 @@ token = os.environ.get('TOKEN')
 bot = commands.Bot(command_prefix=">",
                    description="franz bot")
 # List of cogs
-cogs = ('immigration', 'prison', 'utils', 'events')
+cogs = ('immigration', 'prison', 'utils', 'events', 'error')
 
 # Loads the list of cogs
 if __name__ == "__main__":
@@ -28,7 +28,7 @@ async def on_ready():
     print('Logged in as')
     print(bot.user.name)
     print(bot.user.id)
-    await bot.change_presence(activity=discord.Game(name="War Preparations"))
+    await bot.change_presence(activity=discord.Game(name="Damage Control..."))
     print('------')
 
 # immediately stop the bot
