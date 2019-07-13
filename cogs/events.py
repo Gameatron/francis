@@ -14,6 +14,11 @@ c = conn.cursor()
 class Events(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
+        self.roles = {
+            'prisoner': "Prisoner",
+            'immigrant': "Immigrant",
+            'citizen': "Citizen"
+        }
     
     async def remove_all_roles(self, user):
         for role in user.roles:
@@ -38,8 +43,8 @@ class Events(commands.Cog):
             await ctx.add_roles(role)
         else:
             await channel.send(f"{ctx.mention} has joined.")
-            role = get(ctx.guild.roles, name="Immigrant")
-            ctx.add_roles(role)
+            role = get(ctx.guild.roles, name='Prisoner')
+            await ctx.add_roles(role)
         conn.commit()
     
     @commands.Cog.listener()

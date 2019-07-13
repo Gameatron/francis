@@ -5,7 +5,7 @@ import os
 import dotenv
 
 dotenv.load_dotenv()
-token = os.environ.get('TOKEN')
+token = os.environ.get('MUSS')
 bot = commands.Bot(command_prefix=">",
                    description="franz bot")
 # List of cogs
