@@ -14,12 +14,13 @@ class Immigration(commands.Cog):
     @commands.has_permissions(administrator=True)
     async def accept(self, ctx, user: discord.Member):
         await ctx.message.delete()
-        role = discget(ctx.guild.roles, name="Citizen")
-        await user.add_roles(role)
         role = discget(ctx.guild.roles, name="Immigrant")
         await user.remove_roles(role)
+        role = discget(ctx.guild.roles, name="Citizen")
+        await user.add_roles(role)
         await self.clear(ctx, 1)
-        await ctx.send(f"{user.mention} accepted.", delete_after=3)
+        channel = discget(ctx.guild.channels, name='main-chat')
+        await channel.send(f"{user.mention} accepted. Welcome to the Republic.")
 
     @commands.command()
     @commands.has_permissions(administrator=True)

@@ -46,7 +46,7 @@ class Prison(commands.Cog):
             await user.add_roles(role)
         await ctx.send(f"You have been freed, {user.mention}.", delete_after=5)
         for channel in ctx.guild.channels:
-            if channel.name == "immigration-desk":
+            if channel.name == "migration-office":
                 await channel.send(f"You have been freed, and placed on the watchlist, {user.mention}.", delete_after=10)
                 break
         conn.commit()
