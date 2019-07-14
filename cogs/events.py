@@ -43,7 +43,7 @@ class Events(commands.Cog):
             await ctx.add_roles(role)
         else:
             await channel.send(f"{ctx.mention} has joined.")
-            role = get(ctx.guild.roles, name='Prisoner')
+            role = get(ctx.guild.roles, name='Immigrant')
             await ctx.add_roles(role)
         conn.commit()
     
