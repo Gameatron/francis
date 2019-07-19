@@ -28,7 +28,7 @@ async def on_ready():
     print('Logged in as')
     print(bot.user.name)
     print(bot.user.id)
-    await bot.change_presence(activity=discord.Game(name="Damage Control..."))
+    await bot.change_presence(activity=discord.Game(name="as the First Lady"))
     print('------')
 
 # immediately stop the bot
