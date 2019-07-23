@@ -9,7 +9,7 @@ token = os.environ.get('MUSS')
 bot = commands.Bot(command_prefix=">",
                    description="franz bot")
 # List of cogs
-cogs = ('immigration', 'prison', 'utils', 'events', 'error')
+cogs = ('immigration', 'prison', 'utils', 'events', 'error', 'config', 'fun', 'translator')
 
 # Loads the list of cogs
 if __name__ == "__main__":

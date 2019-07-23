@@ -31,6 +31,17 @@ class Utils(commands.Cog):
         await ctx.send(f"Cleared {amount} messages!", delete_after=5)
         await self.mod_message(ctx, ctx.author, 'Deletion', amount, reason=None)
 
+    @commands.command()
+    @commands.has_permissions(administrator=True)
+    async def ping(self, ctx, *, role: discord.Role):
+        await ctx.message.delete()
+        try:
+            await role.edit(reason='Temp ping.', mentionable=True)
+            await ctx.send(role.mention)
+            await role.edit(reason="Temp ping.", mentionable=False)
+        except discord.ext.commands.errors.BadArgument:
+            await ctx.send(f"That is not a valid role name. (Capitilization matters!)", delete_after=5)
+
 
 def setup(bot):
     bot.add_cog(Utils(bot))
