@@ -50,6 +50,18 @@ class Prison(commands.Cog):
                 await channel.send(f"You have been freed, and placed on the watchlist, {user.mention}.", delete_after=10)
                 break
         conn.commit()
+    
+    @commands.command(pass_context=True)
+    async def prisoners(self, ctx):
+        em = discord.Embed(color=0xFF0000, title='List of all prisoners:')
+        role = discget(ctx.guild.roles, name='Prisoner')
+        for member in ctx.guild.members:
+            if role in member.roles:
+                em.add_field(name=member.name, value=f"<@{member.id}>")
+            else:
+                pass
+        await ctx.send(embed=em)
+
 
 
 def setup(bot):
