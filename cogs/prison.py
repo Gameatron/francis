@@ -7,7 +7,6 @@ import json
 import dotenv
 dotenv.load_dotenv()
 
-token = os.environ.get('TOKEN')
 conn = psycopg2.connect(os.getenv("DATABASE_URL"), sslmode='require')
 c = conn.cursor()
 
