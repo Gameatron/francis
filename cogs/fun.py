@@ -51,6 +51,10 @@ class Fun(commands.Cog):
         except discord.ext.commands.errors.BadArgument:
             await ctx.send("That is not a proper user mention.")
 
+    @commands.command(pass_context=True)
+    async def a(self, ctx):
+        await ctx.send("peepeepoopoo")
+
 
 def setup(bot):
     bot.add_cog(Fun(bot))
