@@ -1,6 +1,11 @@
 import discord
 from discord.ext import commands
 from discord.utils import get as discget
+import os
+import psycopg2
+
+conn = psycopg2.connect(os.getenv("DATABASE_URL"), sslmode='require')
+c = conn.cursor()
 
 
 class Immigration(commands.Cog):
@@ -13,14 +18,16 @@ class Immigration(commands.Cog):
     @commands.command()
     @commands.has_permissions(administrator=True)
     async def accept(self, ctx, user: discord.Member):
+        c.execute(f"SELECT * FROM conf WHERE id = {ctx.guild.id}")
+        conf = c.fetchall()
         await ctx.message.delete()
-        role = discget(ctx.guild.roles, name="Immigrant")
+        role = discget(ctx.guild.roles, name=conf[0][3])
         await user.remove_roles(role)
-        role = discget(ctx.guild.roles, name="Citizen")
+        role = discget(ctx.guild.roles, name=conf[0][11])
         await user.add_roles(role)
         await self.clear(ctx, 1)
-        channel = discget(ctx.guild.channels, name='main-chat')
-        await channel.send(f"{user.mention} accepted. Welcome to the Republic.")
+        channel = discget(ctx.guild.channels, name=conf[0][12])
+        await channel.send(f"{conf[0][13]}".format(user.mention))
 
     @commands.command()
     @commands.has_permissions(administrator=True)
