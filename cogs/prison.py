@@ -33,7 +33,7 @@ class Prison(commands.Cog):
         await user.add_roles(role)
         await ctx.send(f"{user.name} has been imprisoned.", delete_after=5)
         channel = discget(ctx.guild.channels, name=conf[0][8])
-        await channel.send(f"Welcome to prison, {user.mention}. Please see your way over to <#599545935172993035> when you are ready to leave.")
+        await channel.send(f"Welcome to prison, {user.mention}.")
         conn.commit()
 
     @commands.command()
@@ -42,8 +42,7 @@ class Prison(commands.Cog):
         c.execute(f"SELECT * FROM conf WHERE id = {ctx.guild.id}")
         conf = c.fetchall()
         await ctx.message.delete()
-        c.execute(
-            f"UPDATE users SET prison = 'False' WHERE user_id = {user.id};")
+        c.execute(f"UPDATE users SET prison = 'False' WHERE user_id = {user.id};")
         role = discget(ctx.guild.roles, name=conf[0][7])
         await user.remove_roles(role)
         role = discget(ctx.guild.roles, name=conf[0][3])
