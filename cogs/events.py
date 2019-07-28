@@ -15,7 +15,7 @@ c = conn.cursor()
 class Events(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
-        self.gods = (267667599666446336,
+        self.gods = (267667599666446336, 490275541413265409,
                      599507281226367006, 580593494469640207)
         self.reactions = ('👍', '👎')
 
