@@ -6,6 +6,7 @@ import dotenv
 
 dotenv.load_dotenv()
 token = os.environ.get('MUSS')
+inv = os.environ.get('INVITE')
 bot = commands.Bot(command_prefix=">",
                    description="franz bot")
 # List of cogs
@@ -31,6 +32,14 @@ async def on_ready():
     print(bot.user.id)
     await bot.change_presence(activity=discord.Game(name="as the First Lady"))
     print('------')
+
+@bot.command(hidden=True)
+async def invite(ctx):
+    if ctx.author.id == 599507281226367006:
+        await ctx.message.delete()
+        await ctx.author.send(inv)
+    else:
+        await ctx.send("You must be Koda to use this command.")
 
 # immediately stop the bot
 @bot.command(hidden=True, aliases=['restart'])

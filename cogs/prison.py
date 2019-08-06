@@ -67,6 +67,31 @@ class Prison(commands.Cog):
             else:
                 pass
         await ctx.send(embed=em)
+    
+    @commands.command()
+    @commands.has_permissions(administrator=True)
+    async def gulag(self, ctx, user: discord.Member):
+        c.execute(f"SELECT * FROM conf WHERE id = {ctx.guild.id}")
+        conf = c.fetchall()
+        await ctx.message.delete()
+        c.execute(
+            f"UPDATE users SET prison = 'True' WHERE user_id = {user.id};")
+        for role in user.roles:
+            try:
+                await user.remove_roles(role)
+            except:
+                pass
+        role = discget(ctx.guild.roles, id=conf[0][7])
+        await user.add_roles(role)
+        await ctx.send(f"{user.name} has been imprisoned.", delete_after=5)
+        channel = discget(ctx.guild.channels, id=conf[0][8])
+        await channel.send(f"Welcome to prison, {user.mention}.")
+        conn.commit()
+
+    @commands.command(pass_context=True)
+    async def asdf(self, ctx):
+        c.execute("SELECT * FROM conf")
+        print(c.fetchall())
 
 
 def setup(bot):
