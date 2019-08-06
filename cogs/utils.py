@@ -42,6 +42,11 @@ class Utils(commands.Cog):
         except discord.ext.commands.errors.BadArgument:
             await ctx.send(f"That is not a valid role name. (Capitilization matters!)", delete_after=5)
 
+    @commands.command()
+    async def coalition(self, ctx):
+        for item in self.bot.guilds:
+            await ctx.send(item.name)
+        await ctx.send(f"Currently, I see {len(list(self.bot.get_all_members()))} members in the coalition.")
 
 def setup(bot):
     bot.add_cog(Utils(bot))
