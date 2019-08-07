@@ -61,12 +61,12 @@ class Utils(commands.Cog):
                      value=len(list(self.bot.get_all_members())))
         await ctx.send(embed=em)
 
-    @commands.command()
+    @commands.command(hidden=True)
     async def add_server(self, ctx, id: int, invite, *, name):
         c.execute(f"INSERT INTO coalition VALUES({id}, {name}, {invite})")
         conn.commit()
 
-    @commands.command()
+    @commands.command(hidden=True)
     async def update_coalition(self, ctx):
         await ctx.message.delete()
         if ctx.author.id in self.leaders:
@@ -89,7 +89,7 @@ class Utils(commands.Cog):
             await ctx.send("You lack the permissions to use this command.")
 
     @commands.command()
-    async def directories(self, ctx):
+    async def directors(self, ctx):
         await ctx.message.delete()
         em = discord.Embed(
             color=0xFF0000, title="All Current Leader of the Coalition:")
@@ -98,7 +98,15 @@ class Utils(commands.Cog):
             em.add_field(name=user.name,
                          value=f"User: {user.mention}\nUser ID: {user.id}")
         await ctx.send(embed=em)
-
+    
+    @commands.command()
+    async def announce_all(self, ctx,  *, message):
+        if ctx.author.id in self.leaders:
+            for guild in self.bot.guilds:
+                channel = discget(guild.channels, name='coalition')
+                await channel.send(f"New Coalition Announcement!\n\nSent By: {ctx.author.mention}\nMessage: {message}")
+        else:
+            await ctx.send("You lack the permissions to use this command.")
 
 def setup(bot):
     bot.add_cog(Utils(bot))
