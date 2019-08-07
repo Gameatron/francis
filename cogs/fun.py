@@ -23,7 +23,7 @@ class Fun(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    @commands.command(pass_context=True)
+    @commands.command()
     async def greece(self, ctx):
         await asyncio.sleep(1)
         await ctx.send("Can I invade Greece?")
@@ -36,7 +36,7 @@ class Fun(commands.Cog):
         await asyncio.sleep(15)
         await ctx.send("I lost...")
 
-    @commands.command(pass_context=True)
+    @commands.command()
     async def insult(self, ctx, user: discord.Member = None):
         try:
             if user == None:
@@ -51,7 +51,7 @@ class Fun(commands.Cog):
         except discord.ext.commands.errors.BadArgument:
             await ctx.send("That is not a proper user mention.")
 
-    @commands.command(pass_context=True)
+    @commands.command()
     async def a(self, ctx):
         await ctx.send("peepeepoopoo")
 

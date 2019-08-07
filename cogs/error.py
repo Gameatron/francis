@@ -1,7 +1,8 @@
 import discord
 from discord.ext import commands
 import math
-import sys, traceback
+import sys
+import traceback
 
 
 class Error(commands.Cog):
@@ -21,12 +22,15 @@ class Error(commands.Cog):
             await ctx.send("That command does not exist.")
 
         if isinstance(error, commands.BotMissingPermissions):
-            missing = [perm.replace('_', ' ').replace('guild', 'server').title() for perm in error.missing_perms]
+            missing = [perm.replace('_', ' ').replace(
+                'guild', 'server').title() for perm in error.missing_perms]
             if len(missing) > 2:
-                fmt = '{}, and {}'.format("**, **".join(missing[:-1]), missing[-1])
+                fmt = '{}, and {}'.format(
+                    "**, **".join(missing[:-1]), missing[-1])
             else:
                 fmt = ' and '.join(missing)
-            _message = 'I need the **{}** permission(s) to run this command.'.format(fmt)
+            _message = 'I need the **{}** permission(s) to run this command.'.format(
+                fmt)
             await ctx.send(_message)
             return
 
@@ -39,12 +43,15 @@ class Error(commands.Cog):
             return
 
         if isinstance(error, commands.MissingPermissions):
-            missing = [perm.replace('_', ' ').replace('guild', 'server').title() for perm in error.missing_perms]
+            missing = [perm.replace('_', ' ').replace(
+                'guild', 'server').title() for perm in error.missing_perms]
             if len(missing) > 2:
-                fmt = '{}, and {}'.format("**, **".join(missing[:-1]), missing[-1])
+                fmt = '{}, and {}'.format(
+                    "**, **".join(missing[:-1]), missing[-1])
             else:
                 fmt = ' and '.join(missing)
-            _message = 'You need the **{}** permission(s) to use this command.'.format(fmt)
+            _message = 'You need the **{}** permission(s) to use this command.'.format(
+                fmt)
             await ctx.send(_message)
             return
 
@@ -64,9 +71,12 @@ class Error(commands.Cog):
             return
 
         # ignore all other exception types, but print them to stderr
-        print('Ignoring exception in command {}:'.format(ctx.command), file=sys.stderr)
+        print('Ignoring exception in command {}:'.format(
+            ctx.command), file=sys.stderr)
 
-        traceback.print_exception(type(error), error, error.__traceback__, file=sys.stderr)
+        traceback.print_exception(
+            type(error), error, error.__traceback__, file=sys.stderr)
+
 
 def setup(bot):
     bot.add_cog(Error(bot))

@@ -22,7 +22,7 @@ class Economy(commands.Cog):
             return rows
         return rows
 
-    @commands.command(pass_context=True, aliases=["bal"])
+    @commands.command(aliases=["bal"])
     async def balance(self, ctx, user: discord.Member = None):
         if user == None:
             user = ctx.author
@@ -35,7 +35,7 @@ class Economy(commands.Cog):
                      value=f"{emoji}{str(rows[0][1])}")
         await ctx.send(embed=em)
 
-    @commands.command(pass_context=True)
+    @commands.command()
     async def work(self, ctx):
         c.execute(f"SELECT * FROM eco WHERE id = {ctx.author.id}")
         rows = c.fetchall()
@@ -50,7 +50,7 @@ class Economy(commands.Cog):
             await ctx.send(f"You need to wait {int(30 - (time.time() - float(rows[0][2])))} more seconds to work, {ctx.author.mention}")
         conn.commit()
 
-    @commands.command(pass_context=True)
+    @commands.command()
     @commands.has_permissions(administrator=True)
     async def addmoney(self, ctx, amount: int, user: discord.Member):
         c.execute(f"SELECT * FROM eco WHERE id = {user.id}")

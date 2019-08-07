@@ -33,6 +33,7 @@ async def on_ready():
     await bot.change_presence(activity=discord.Game(name="as the First Lady"))
     print('------')
 
+
 @bot.command(hidden=True)
 async def invite(ctx):
     if ctx.author.id == 599507281226367006:

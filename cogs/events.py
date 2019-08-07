@@ -61,7 +61,7 @@ class Events(commands.Cog):
                 await ctx.add_roles(role)
             conn.commit()
 
-    @commands.command(pass_context=True)
+    @commands.command()
     @commands.has_permissions(administrator=True)
     async def authorize(self, ctx, uid, *, name):
         c.execute(f"SELECT * FROM conf WHERE id = {ctx.guild.id}")
@@ -91,7 +91,7 @@ class Events(commands.Cog):
             channel = get(ctx.guild.channels, id=conf[0][6])
             await channel.send(f"{conf[0][5]}".format(ctx.name))
 
-    @commands.command(pass_context=True)
+    @commands.command()
     @commands.has_permissions(administrator=True)
     async def bots(self, ctx):
         em = discord.Embed(color=0xFF0000, title="All authorised bots:")
