@@ -30,7 +30,7 @@ async def on_ready():
     print('Logged in as')
     print(bot.user.name)
     print(bot.user.id)
-    await bot.change_presence(activity=discord.Game(name="as the First Lady"))
+    await bot.change_presence(activity=discord.Game(name="| >help | Made by Koda#8495"))
     print('------')
 
 

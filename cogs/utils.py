@@ -7,13 +7,12 @@ import os
 conn = psycopg2.connect(os.getenv("DATABASE_URL"), sslmode='require')
 c = conn.cursor()
 
-
 class Utils(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
         self.leaders = [599507281226367006, 585722582565781521, 606614408709537806,
                         412017598763630594, 525589663310807040, 596413516680790017,
-                        580594776013930497, 294567582969757696]
+                        294567582969757696]
 
     async def clear(self, ctx, amount: int):
         await ctx.channel.purge(limit=amount)
@@ -77,7 +76,7 @@ class Utils(commands.Cog):
                 em.add_field(
                     name=guild[1], value=f"Server ID: {guild[0]}\nServer Invite: {guild[2]}", inline=False)
             em.set_footer(
-                text=f"There are currently {len(list(self.bot.get_all_members()))} members in the Coalition, out of {len(list(self.bot.guilds))} states.")
+                text=f"There are currently {len(list(self.bot.get_all_members()))} members in the Coalition, out of {len(list(self.bot.guilds))} states that I am in.")
             em.set_thumbnail(
                 url='https://cdn.discordapp.com/attachments/608452530384404483/608548001048428544/The_Coalition_logo.jpg')
             for guild in self.bot.guilds:
