@@ -11,7 +11,8 @@ bot = commands.Bot(command_prefix=">",
                    description="franz bot")
 # List of cogs
 cogs = ('immigration', 'prison', 'utils', 'events',
-        'error', 'fun', 'translator', 'economy', 'config')
+        'error', 'fun', 'translator', 'economy', 'config',
+        'nuke', 'rainbow')
 
 # Loads the list of cogs
 if __name__ == "__main__":
