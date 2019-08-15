@@ -50,62 +50,66 @@ class Utils(commands.Cog):
             await ctx.send(f"That is not a valid role name. (Capitilization matters!)", delete_after=5)
 
     @commands.command()
-    async def coalition(self, ctx):
+    async def servers(self, ctx):
         em = discord.Embed(
-            color=0xFF0000, title="List of all Coalition Serves:")
+            color=0xFF0000, title="List of all Serves:")
         for item in self.bot.guilds:
             em.add_field(
                 name=item.name, value=f"{len(list(item.members))} members", inline=False)
         em.add_field(name="Total number of Coalition members currently:",
                      value=len(list(self.bot.get_all_members())))
         await ctx.send(embed=em)
-
-    @commands.command(hidden=True)
-    async def add_server(self, ctx, id: int, invite, *, name):
-        c.execute(f"INSERT INTO coalition VALUES({id}, {name}, {invite})")
-        conn.commit()
-
-    @commands.command(hidden=True)
-    async def update_coalition(self, ctx):
-        await ctx.message.delete()
-        if ctx.author.id in self.leaders:
-            c.execute(f"SELECT * FROM coalition")
-            coalition = c.fetchall()
-            em = discord.Embed(color=0xFF0000)
-            for guild in coalition:
-                em.add_field(
-                    name=guild[1], value=f"Server ID: {guild[0]}\nServer Invite: {guild[2]}", inline=False)
-            em.set_footer(
-                text=f"There are currently {len(list(self.bot.get_all_members()))} members in the Coalition, out of {len(list(self.bot.guilds))} states that I am in.")
-            em.set_thumbnail(
-                url='https://cdn.discordapp.com/attachments/608452530384404483/608548001048428544/The_Coalition_logo.jpg')
-            for guild in self.bot.guilds:
-                channel = discget(guild.channels, name='coalition')
-                if not channel == None:
-                    await channel.purge(limit=100)
-                    await channel.send(embed=em)
-        else:
-            await ctx.send("You lack the permissions to use this command.")
-
+        
     @commands.command()
-    async def directors(self, ctx):
-        await ctx.message.delete()
-        em = discord.Embed(
-            color=0xFF0000, title="All Current Leader of the Coalition:")
-        for user in self.leaders:
-            user = self.bot.get_user(user)
-            em.add_field(name=user.name,
-                         value=f"User: {user.mention}\nUser ID: {user.id}")
-        await ctx.send(embed=em)
+    async def user(self, ctx, user: discord.Member):
+        await ctx.send(user.mention)
+
+    # @commands.command(hidden=True)
+    # async def add_server(self, ctx, id: int, invite, *, name):
+    #     c.execute(f"INSERT INTO coalition VALUES({id}, {name}, {invite})")
+    #     conn.commit()
+
+    # @commands.command(hidden=True)
+    # async def update_coalition(self, ctx):
+    #     await ctx.message.delete()
+    #     if ctx.author.id in self.leaders:
+    #         c.execute(f"SELECT * FROM coalition")
+    #         coalition = c.fetchall()
+    #         em = discord.Embed(color=0xFF0000)
+    #         for guild in coalition:
+    #             em.add_field(
+    #                 name=guild[1], value=f"Server ID: {guild[0]}\nServer Invite: {guild[2]}", inline=False)
+    #         em.set_footer(
+    #             text=f"There are currently {len(list(self.bot.get_all_members()))} members in the Coalition, out of {len(list(self.bot.guilds))} states that I am in.")
+    #         em.set_thumbnail(
+    #             url='https://cdn.discordapp.com/attachments/608452530384404483/608548001048428544/The_Coalition_logo.jpg')
+    #         for guild in self.bot.guilds:
+    #             channel = discget(guild.channels, name='coalition')
+    #             if not channel == None:
+    #                 await channel.purge(limit=100)
+    #                 await channel.send(embed=em)
+    #     else:
+    #         await ctx.send("You lack the permissions to use this command.")
+
+    # @commands.command()
+    # async def directors(self, ctx):
+    #     await ctx.message.delete()
+    #     em = discord.Embed(
+    #         color=0xFF0000, title="All Current Leader of the Coalition:")
+    #     for user in self.leaders:
+    #         user = self.bot.get_user(user)
+    #         em.add_field(name=user.name,
+    #                      value=f"User: {user.mention}\nUser ID: {user.id}")
+    #     await ctx.send(embed=em)
     
-    @commands.command()
-    async def announce_all(self, ctx,  *, message):
-        if ctx.author.id in self.leaders:
-            for guild in self.bot.guilds:
-                channel = discget(guild.channels, name='coalition')
-                await channel.send(f"New Coalition Announcement!\n\nSent By: {ctx.author.mention}\nMessage: {message}")
-        else:
-            await ctx.send("You lack the permissions to use this command.")
+    # @commands.command()
+    # async def announce_all(self, ctx,  *, message):
+    #     if ctx.author.id in self.leaders:
+    #         for guild in self.bot.guilds:
+    #             channel = discget(guild.channels, name='coalition')
+    #             await channel.send(f"New Coalition Announcement!\n\nSent By: {ctx.author.mention}\nMessage: {message}")
+    #     else:
+    #         await ctx.send("You lack the permissions to use this command.")
 
 def setup(bot):
     bot.add_cog(Utils(bot))
