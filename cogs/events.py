@@ -91,20 +91,6 @@ class Events(commands.Cog):
             channel = get(ctx.guild.channels, id=conf[0][6])
             await channel.send(f"{conf[0][5]}".format(ctx.name))
 
-    @commands.command()
-    @commands.has_permissions(administrator=True)
-    async def bots(self, ctx):
-        em = discord.Embed(color=0xFF0000, title="All authorised bots:")
-        c.execute("SELECT * FROM bots")
-        rows = c.fetchall()
-        if rows == []:
-            await ctx.send("No bots have been authorised.")
-            return
-        for row in rows:
-            em.add_field(
-                name=row[1], value=f"Bot ID: {row[0]}\nAuthorised by: {row[2]}", inline=False)
-        await ctx.send(embed=em)
-
 
 def setup(bot):
     bot.add_cog(Events(bot))

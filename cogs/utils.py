@@ -7,12 +7,11 @@ import os
 conn = psycopg2.connect(os.getenv("DATABASE_URL"), sslmode='require')
 c = conn.cursor()
 
+
 class Utils(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
-        self.leaders = [599507281226367006, 585722582565781521, 606614408709537806,
-                        412017598763630594, 525589663310807040, 596413516680790017,
-                        294567582969757696]
+        self.leaders = [599507281226367006]
 
     async def clear(self, ctx, amount: int):
         await ctx.channel.purge(limit=amount)
@@ -56,13 +55,33 @@ class Utils(commands.Cog):
         for item in self.bot.guilds:
             em.add_field(
                 name=item.name, value=f"{len(list(item.members))} members", inline=False)
-        em.add_field(name="Total number of Coalition members currently:",
+        em.add_field(name="Total number of members currently seen:",
                      value=len(list(self.bot.get_all_members())))
         await ctx.send(embed=em)
-        
+
     @commands.command()
-    async def user(self, ctx, user: discord.Member):
-        await ctx.send(user.mention)
+    async def server(self, ctx):
+        c.execute("SELECT * FROM guilds")
+        rows = c.fetchall()
+        allowed = rows[0]
+        for guild in self.bot.guilds:
+            if not guild.id in allowed:
+                await guild.leave()
+                await ctx.send(f"Left the server `{guild.name}'")
+
+    @commands.command()
+    @commands.has_permissions(administrator=True)
+    async def bots(self, ctx):
+        em = discord.Embed(color=0xFF0000, title="All authorised bots:")
+        c.execute("SELECT * FROM bots")
+        rows = c.fetchall()
+        if rows == []:
+            await ctx.send("No bots have been authorised.")
+            return
+        for row in rows:
+            em.add_field(
+                name=row[1], value=f"Bot ID: {row[0]}\nAuthorised by: {row[2]}", inline=False)
+        await ctx.send(embed=em)
 
     # @commands.command(hidden=True)
     # async def add_server(self, ctx, id: int, invite, *, name):
@@ -101,7 +120,7 @@ class Utils(commands.Cog):
     #         em.add_field(name=user.name,
     #                      value=f"User: {user.mention}\nUser ID: {user.id}")
     #     await ctx.send(embed=em)
-    
+
     # @commands.command()
     # async def announce_all(self, ctx,  *, message):
     #     if ctx.author.id in self.leaders:
@@ -110,6 +129,7 @@ class Utils(commands.Cog):
     #             await channel.send(f"New Coalition Announcement!\n\nSent By: {ctx.author.mention}\nMessage: {message}")
     #     else:
     #         await ctx.send("You lack the permissions to use this command.")
+
 
 def setup(bot):
     bot.add_cog(Utils(bot))
