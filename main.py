@@ -8,11 +8,11 @@ dotenv.load_dotenv()
 token = os.environ.get('MUSS')
 inv = os.environ.get('INVITE')
 bot = commands.Bot(command_prefix=">",
-                   description="franz bot")
+                   description="muss bot")
 # List of cogs
 cogs = ('immigration', 'prison', 'utils', 'events',
         'error', 'fun', 'translator', 'economy', 'config',
-        'nuke', 'rainbow')
+        'nuke')
 
 # Loads the list of cogs
 if __name__ == "__main__":

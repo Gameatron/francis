@@ -11,23 +11,10 @@ c = conn.cursor()
 class Utils(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
-        self.leaders = [599507281226367006]
+        self.leaders = [599507281226367006, 267667599666446336]
 
     async def clear(self, ctx, amount: int):
         await ctx.channel.purge(limit=amount)
-
-    async def mod_message(self, ctx, author, type, amount, user=None, reason="No reason specified."):
-        em = discord.Embed(title=f"{type} report:", color=0xFF0000)
-        if not user == None:
-            em.add_field(name="User:", value=user.name)
-        em.add_field(name="Action:", value=type)
-        em.add_field(name="Moderator:", value=author.name)
-        if not reason == None:
-            em.add_field(name="Reason:", value=reason)
-        if type == 'Deletion':
-            em.add_field(name='Messages Cleared:', value=amount)
-        channel = discget(ctx.guild.channels, name="mod-log")
-        await channel.send(embed=em)
 
     @commands.command(aliases=('purge', 'clean', 'clear'))
     @commands.has_permissions(manage_messages=True)
@@ -35,7 +22,6 @@ class Utils(commands.Cog):
         await ctx.message.delete()
         await self.clear(ctx, amount)
         await ctx.send(f"Cleared {amount} messages!", delete_after=5)
-        await self.mod_message(ctx, ctx.author, 'Deletion', amount, reason=None)
 
     @commands.command()
     @commands.has_permissions(administrator=True)
@@ -61,13 +47,26 @@ class Utils(commands.Cog):
 
     @commands.command()
     async def server(self, ctx):
-        c.execute("SELECT * FROM guilds")
-        rows = c.fetchall()
-        allowed = rows[0]
-        for guild in self.bot.guilds:
-            if not guild.id in allowed:
-                await guild.leave()
-                await ctx.send(f"Left the server `{guild.name}'")
+        if ctx.author.id in self.leaders:
+            await ctx.message.delete()
+            c.execute("SELECT * FROM guilds")
+            rows = c.fetchall()
+            allowed = rows[0]
+            for guild in self.bot.guilds:
+                if not guild.id in allowed:
+                    await guild.leave()
+                    await ctx.send(f"Left the server `{guild.name}'")
+        else:
+            print("You do not have the permission to use this command.")
+    
+    @commands.command()
+    async def add_server(self, ctx, sid):
+        await ctx.message.delete()
+        if ctx.author.id in self.leaders:
+            c.execute(f"INSERT INTO guilds VALUES({int(sid)})")
+            conn.commit() 
+        else:
+            print("You do not have the permission to use this command.")       
 
     @commands.command()
     @commands.has_permissions(administrator=True)
@@ -83,10 +82,15 @@ class Utils(commands.Cog):
                 name=row[1], value=f"Bot ID: {row[0]}\nAuthorised by: {row[2]}", inline=False)
         await ctx.send(embed=em)
 
-    # @commands.command(hidden=True)
-    # async def add_server(self, ctx, id: int, invite, *, name):
-    #     c.execute(f"INSERT INTO coalition VALUES({id}, {name}, {invite})")
-    #     conn.commit()
+    @commands.command()
+    async def mortis_update(self, ctx):
+        if ctx.author.id in self.leaders:
+            for guild in self.bot.guilds:
+                channel = discget(guild.channels, name='mortis-imperium')
+                await channel.send("Test Message.")
+        else:
+            print("You do not have permission to use this command.")
+
 
     # @commands.command(hidden=True)
     # async def update_coalition(self, ctx):
@@ -110,25 +114,25 @@ class Utils(commands.Cog):
     #     else:
     #         await ctx.send("You lack the permissions to use this command.")
 
-    # @commands.command()
-    # async def directors(self, ctx):
-    #     await ctx.message.delete()
-    #     em = discord.Embed(
-    #         color=0xFF0000, title="All Current Leader of the Coalition:")
-    #     for user in self.leaders:
-    #         user = self.bot.get_user(user)
-    #         em.add_field(name=user.name,
-    #                      value=f"User: {user.mention}\nUser ID: {user.id}")
-    #     await ctx.send(embed=em)
+    @commands.command()
+    async def directors(self, ctx):
+        await ctx.message.delete()
+        em = discord.Embed(
+            color=0xFF0000, title="All Current Leaders of Mortis Imperium:")
+        for user in self.leaders:
+            user = self.bot.get_user(user)
+            em.add_field(name=user.name,
+                         value=f"User: {user.mention}")
+        await ctx.send(embed=em)
 
-    # @commands.command()
-    # async def announce_all(self, ctx,  *, message):
-    #     if ctx.author.id in self.leaders:
-    #         for guild in self.bot.guilds:
-    #             channel = discget(guild.channels, name='coalition')
-    #             await channel.send(f"New Coalition Announcement!\n\nSent By: {ctx.author.mention}\nMessage: {message}")
-    #     else:
-    #         await ctx.send("You lack the permissions to use this command.")
+    @commands.command()
+    async def mortis_announce(self, ctx,  *, message):
+        if ctx.author.id in self.leaders:
+            for guild in self.bot.guilds:
+                channel = discget(guild.channels, name='mortis-imperium')
+                await channel.send(f"New Mortis Announcement!\n\nSent By: {ctx.author.mention}\nMessage:\n{message}")
+        else:
+            await ctx.send("You lack the permissions to use this command.")
 
 
 def setup(bot):
