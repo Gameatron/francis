@@ -91,29 +91,6 @@ class Utils(commands.Cog):
         else:
             print("You do not have permission to use this command.")
 
-
-    # @commands.command(hidden=True)
-    # async def update_coalition(self, ctx):
-    #     await ctx.message.delete()
-    #     if ctx.author.id in self.leaders:
-    #         c.execute(f"SELECT * FROM coalition")
-    #         coalition = c.fetchall()
-    #         em = discord.Embed(color=0xFF0000)
-    #         for guild in coalition:
-    #             em.add_field(
-    #                 name=guild[1], value=f"Server ID: {guild[0]}\nServer Invite: {guild[2]}", inline=False)
-    #         em.set_footer(
-    #             text=f"There are currently {len(list(self.bot.get_all_members()))} members in the Coalition, out of {len(list(self.bot.guilds))} states that I am in.")
-    #         em.set_thumbnail(
-    #             url='https://cdn.discordapp.com/attachments/608452530384404483/608548001048428544/The_Coalition_logo.jpg')
-    #         for guild in self.bot.guilds:
-    #             channel = discget(guild.channels, name='coalition')
-    #             if not channel == None:
-    #                 await channel.purge(limit=100)
-    #                 await channel.send(embed=em)
-    #     else:
-    #         await ctx.send("You lack the permissions to use this command.")
-
     @commands.command()
     async def directors(self, ctx):
         await ctx.message.delete()

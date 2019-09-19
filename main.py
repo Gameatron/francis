@@ -41,7 +41,7 @@ async def invite(ctx):
         await ctx.message.delete()
         await ctx.author.send(inv)
     else:
-        await ctx.send("You must be Koda to use this command.")
+        await ctx.send("You do not have permission to use this command.")
 
 # immediately stop the bot
 @bot.command(hidden=True, aliases=['restart'])
