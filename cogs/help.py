@@ -18,7 +18,7 @@ class Help(commands.Cog):
         embed.add_field(name="prisoners", value="Shows all current prisoners. Anyone that is in this list will be imprisoned upon joining a server with Mussolini in it.", inline=False)
         embed.add_field(name="bots", value="Shows all authorized bots. Any bot that is not in this list will be removed upon joining a server Mussolini is in.", inline=False)
         embed.add_field(name="servers", value="Shows all servers mussolini is currently in.", inline=False)
-        await self.bot.say(embed=embed)
+        await ctx.send(embed=embed)
 
 def setup(bot):
     bot.add_cog(Help(bot))
