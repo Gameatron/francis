@@ -12,7 +12,8 @@ bot = commands.Bot(command_prefix=">",
 # List of cogs
 cogs = ('immigration', 'prison', 'utils', 'events',
         'error', 'fun', 'translator', 'economy', 'config',
-        'nuke')
+        'nuke', 'help')
+bot.remove_command('help')
 
 # Loads the list of cogs
 if __name__ == "__main__":
