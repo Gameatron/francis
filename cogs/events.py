@@ -49,7 +49,8 @@ class Events(commands.Cog):
                 rows = c.fetchall()
                 if rows == []:
                     c.execute(f"INSERT INTO users VALUES({ctx.id}, 'False');")
-                c.execute(f"SELECT prison FROM users WHERE user_id = {ctx.id};")
+                c.execute(
+                    f"SELECT prison FROM users WHERE user_id = {ctx.id};")
                 rows = c.fetchall()
                 if 'True ' in rows[0]:
                     await asyncio.sleep(1)
@@ -96,7 +97,6 @@ class Events(commands.Cog):
                 await channel.send(f"{conf[0][5]}".format(ctx.name))
         except IndexError:
             pass
-
 
 def setup(bot):
     bot.add_cog(Events(bot))
