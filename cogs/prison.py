@@ -38,7 +38,7 @@ class Prison(commands.Cog):
                 await channel.send(f"Welcome to prison, {user.mention}.")
                 conn.commit()
             else:
-                await ctx.send("You cannot imprison someone with a lesser or equal role.")
+                await ctx.send("You cannot imprison someone with a higher or equal top role.")
         else:
             await ctx.send("You can't imprison yourself, tard.")
             
