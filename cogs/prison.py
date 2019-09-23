@@ -19,22 +19,28 @@ class Prison(commands.Cog):
     @commands.command()
     @commands.has_permissions(administrator=True)
     async def imprison(self, ctx, user: discord.Member):
-        c.execute(f"SELECT * FROM conf WHERE id = {ctx.guild.id}")
-        conf = c.fetchall()
-        await ctx.message.delete()
-        c.execute(
-            f"UPDATE users SET prison = 'True' WHERE user_id = {user.id};")
-        for role in user.roles:
-            try:
-                await user.remove_roles(role)
-            except:
-                pass
-        role = discget(ctx.guild.roles, id=conf[0][7])
-        await user.add_roles(role)
-        await ctx.send(f"{user.name} has been imprisoned.", delete_after=5)
-        channel = discget(ctx.guild.channels, id=conf[0][8])
-        await channel.send(f"Welcome to prison, {user.mention}.")
-        conn.commit()
+        if not ctx.author == user:
+            if not ctx.author.top_role.position <= user.top_role.position:
+                c.execute(f"SELECT * FROM conf WHERE id = {ctx.guild.id}")
+                conf = c.fetchall()
+                await ctx.message.delete()
+                c.execute(
+                    f"UPDATE users SET prison = 'True' WHERE user_id = {user.id};")
+                for role in user.roles:
+                    try:
+                        await user.remove_roles(role)
+                    except:
+                        pass
+                role = discget(ctx.guild.roles, id=conf[0][7])
+                await user.add_roles(role)
+                await ctx.send(f"{user.name} has been imprisoned.", delete_after=5)
+                channel = discget(ctx.guild.channels, id=conf[0][8])
+                await channel.send(f"Welcome to prison, {user.mention}.")
+                conn.commit()
+            else:
+                await ctx.send("You can't imprison yourself, tard.")
+        else:
+            await ctx.send("You cannot imprison someone with a lesser or equal role.")
 
     @commands.command()
     @commands.has_permissions(administrator=True)
