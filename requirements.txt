@@ -5,3 +5,4 @@ asyncpg
 googletrans
 psycopg2
 python-dotenv
+urbandictionary
