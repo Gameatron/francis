@@ -8,7 +8,7 @@ class Define(commands.Cog):
         self.bot = bot
 
     @commands.command()
-    async def define(self, ctx, word):
+    async def define(self, ctx, *, word):
         try:
             defs = ud.define(word)
             em = discord.Embed(title=f"Definition of {word}:", description=defs[0]['def'])
