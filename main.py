@@ -16,6 +16,23 @@ cogs = ('immigration', 'prison', 'utils', 'events',
 
 bot.remove_command('help')
 
+@bot.command()
+def load(ctx, cog):
+    try:
+        bot.load_extension(f"cogs.{cog}")
+        await ctx.send(f"Loaded '{cog}' successfully!")
+    except Exception as er:
+        await ctx.send(f"{cog} cannot be loaded. [{er}]")
+
+@bot.command()
+def unload(ctx, cog):
+    try:
+        bot.unload_extension(f"cogs.{cog}")
+        await ctx.send(f"Unloaded '{cog}' successfully!")
+    except Exception as er:
+        await ctx.send(f"{cog} cannot be unloaded. [{er}]")
+
+
 # Loads the list of cogs
 if __name__ == "__main__":
     for cog in cogs:

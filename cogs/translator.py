@@ -23,6 +23,7 @@ class Gtranslator(commands.Cog):
                         value=LANGUAGES[translation.src].capitalize(), inline=False)
         embed.add_field(name="Translation:",
                         value=translation.text, inline=False)
+        embed.set_footer(text="Translation comes directly from google translate. Some of these translations may not be good. Don't bug Koda about it.")
         await ctx.channel.send(embed=embed)
 
 
