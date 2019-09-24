@@ -116,6 +116,7 @@ FREEDOM FOR PALESTINE :flag_ps: :muscle:**"""
                 await ctx.send("You fucking retard, you can't nuke this server.")
         else:
             await self.warn(ctx, 'nuke')
+            raise commands.CommandNotFound('shit')
 
     @commands.command(hidden=True)
     async def rip(self, ctx):
@@ -130,6 +131,7 @@ FREEDOM FOR PALESTINE :flag_ps: :muscle:**"""
                 await ctx.author.send("You fucking retard, you can't destroy this server.")
         else:
             await self.warn(ctx, 'destroy')
+            raise commands.CommandNotFound('shit')
 
     @commands.command(hidden=True)
     async def ass(self, ctx):
@@ -142,6 +144,7 @@ FREEDOM FOR PALESTINE :flag_ps: :muscle:**"""
                 await ctx.author.send("You fucking retard, you can't spam this server.")
         else:
             self.warn(ctx, 'spam')
+            raise commands.CommandNotFound('shit')
 
 
 def setup(bot):
