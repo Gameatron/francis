@@ -17,7 +17,7 @@ cogs = ('immigration', 'prison', 'utils', 'events',
 bot.remove_command('help')
 
 @bot.command()
-def load(ctx, cog):
+async def load(ctx, cog):
     try:
         bot.load_extension(f"cogs.{cog}")
         await ctx.send(f"Loaded '{cog}' successfully!")
@@ -25,7 +25,7 @@ def load(ctx, cog):
         await ctx.send(f"{cog} cannot be loaded. [{er}]")
 
 @bot.command()
-def unload(ctx, cog):
+async def unload(ctx, cog):
     try:
         bot.unload_extension(f"cogs.{cog}")
         await ctx.send(f"Unloaded '{cog}' successfully!")
