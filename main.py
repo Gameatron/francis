@@ -18,25 +18,25 @@ bot.remove_command('help')
 
 @bot.command()
 async def load(ctx, cog):
-    if ctx.author.id == 599507281226367006:
+    if ctx.author.id == 570610102118252544:
         try:
             bot.load_extension(f"cogs.{cog}")
             await ctx.send(f"Loaded '{cog}' successfully!")
         except Exception as er:
             await ctx.send(f"{cog} cannot be loaded. [{er}]")
     else:
-        raise commands.CommandNotFound('shit')
+        raise commands.CommandNotFound('error')
 
 @bot.command()
 async def unload(ctx, cog):
-    if ctx.author.id == 599507281226367006:
+    if ctx.author.id == 570610102118252544:
         try:
             bot.unload_extension(f"cogs.{cog}")
             await ctx.send(f"Unloaded '{cog}' successfully!")
         except Exception as er:
             await ctx.send(f"{cog} cannot be unloaded. [{er}]")
     else:
-        raise commands.CommandNotFound("shit")
+        raise commands.CommandNotFound("error")
 
 
 # Loads the list of cogs
@@ -60,16 +60,16 @@ async def on_ready():
     print('------')
 
 
-@bot.command(hidden=True)
+@bot.command()
 async def invite(ctx):
-    if ctx.author.id == 599507281226367006:
+    if ctx.author.id == 570610102118252544:
         await ctx.message.delete()
         await ctx.author.send(inv)
     else:
         await ctx.send("You do not have permission to use this command.")
 
 # immediately stop the bot
-@bot.command(hidden=True, aliases=['restart'])
+@bot.command(aliases=['restart'])
 async def stop(ctx):
     await bot.logout()
 
