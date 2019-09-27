@@ -11,7 +11,7 @@ c = conn.cursor()
 class Utils(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
-        self.leaders = [570610102118252544, 267667599666446336]
+        self.leaders = [599507281226367006, 267667599666446336]
 
     async def clear(self, ctx, amount: int):
         await ctx.channel.purge(limit=amount)

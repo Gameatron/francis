@@ -5,8 +5,7 @@ import os
 import dotenv
 
 dotenv.load_dotenv()
-token = os.environ.get('MUSS')
-inv = os.environ.get('INVITE')
+token, inv = os.environ.get('MUSS'), os.environ.get('INVITE')
 bot = commands.Bot(command_prefix=">",
                    description="muss bot")
 # List of cogs
@@ -16,9 +15,10 @@ cogs = ('immigration', 'prison', 'utils', 'events',
 
 bot.remove_command('help')
 
+
 @bot.command()
 async def load(ctx, cog):
-    if ctx.author.id == 570610102118252544:
+    if ctx.author.id == 599507281226367006:
         try:
             bot.load_extension(f"cogs.{cog}")
             await ctx.send(f"Loaded '{cog}' successfully!")
@@ -27,9 +27,10 @@ async def load(ctx, cog):
     else:
         raise commands.CommandNotFound('error')
 
+
 @bot.command()
 async def unload(ctx, cog):
-    if ctx.author.id == 570610102118252544:
+    if ctx.author.id == 599507281226367006:
         try:
             bot.unload_extension(f"cogs.{cog}")
             await ctx.send(f"Unloaded '{cog}' successfully!")
@@ -62,7 +63,7 @@ async def on_ready():
 
 @bot.command()
 async def invite(ctx):
-    if ctx.author.id == 570610102118252544:
+    if ctx.author.id == 599507281226367006:
         await ctx.message.delete()
         await ctx.author.send(inv)
     else:

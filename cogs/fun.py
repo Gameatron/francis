@@ -33,7 +33,7 @@ class Fun(commands.Cog):
             await ctx.send("YES! Will do! Heil Hitler!")
         else:
             await ctx.send("Fuck you, I'm invading Greece!")
-        await asyncio.sleep(15)
+        await asyncio.sleep(10)
         await ctx.send("I lost...")
 
     @commands.command()
@@ -50,10 +50,6 @@ class Fun(commands.Cog):
             await ctx.send(embed=embed)
         except discord.ext.commands.errors.BadArgument:
             await ctx.send("That is not a proper user mention.")
-
-    @commands.command()
-    async def a(self, ctx):
-        await ctx.send("peepeepoopoo")
 
 
 def setup(bot):

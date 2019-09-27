@@ -16,7 +16,7 @@ class Events(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
         self.gods = (267667599666446336, 490275541413265409,
-                     570610102118252544, 580593494469640207)
+                     599507281226367006, 580593494469640207)
         self.reactions = ('👍', '👎')
 
     async def remove_all_roles(self, user):
@@ -37,10 +37,10 @@ class Events(commands.Cog):
                 rows = c.fetchall()
                 if rows == []:
                     channel = get(ctx.guild.channels, id=conf[0][10])
-                    await channel.send(f"An admin has attempted to add the bot `{ctx.name}` to this server that is unauthorised. To authorize it, type `>authorize {ctx.id} {ctx.name}` {ctx.guild.owner.mention} <@570610102118252544>")
+                    await channel.send(f"An admin has attempted to add the bot `{ctx.name}` to this server that is unauthorised. To authorize it, type `>authorize {ctx.id} {ctx.name}` {ctx.guild.owner.mention} <@599507281226367006>")
                     await ctx.guild.kick(ctx, reason="Unauthorised Bot")
                 else:
-                    await channel.send(f"An admin has attempted to add the bot `{ctx.name}` to the server succesfully. {ctx.guild.owner.mention} <@570610102118252544>")
+                    await channel.send(f"An admin has attempted to add the bot `{ctx.name}` to the server succesfully. {ctx.guild.owner.mention} <@599507281226367006>")
                     role = get(ctx.guild.roles, id=conf[0][4])
                     await ctx.add_roles(role)
             else:
