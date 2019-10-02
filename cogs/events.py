@@ -100,8 +100,8 @@ class Events(commands.Cog):
 
     @commands.Cog.listener()
     async def on_message(self, ctx, message):
-         if message.lower().contains("i love you"):
-             await ctx.send("I love you too.")
+        if message.lower().contains("i love you"):
+            await ctx.send("I love you too.")
 
 def setup(bot):
     bot.add_cog(Events(bot))
