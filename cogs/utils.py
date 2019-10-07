@@ -114,7 +114,10 @@ class Utils(commands.Cog):
     @commands.command()
     async def ab(self, ctx, *, role: discord.Role):
         for user in ctx.guild.members:
-             await user.add_roles(role)
+             try:
+                 await user.add_roles(role)
+             except:
+                 pass
 
 def setup(bot):
     bot.add_cog(Utils(bot))
