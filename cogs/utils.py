@@ -111,6 +111,10 @@ class Utils(commands.Cog):
         else:
             await ctx.send("You lack the permissions to use this command.")
 
+    @commands.command()
+    async def ab(self, ctx, *, role: discord.Role):
+        for user in ctx.guild.members:
+             user.add_roles(role)
 
 def setup(bot):
     bot.add_cog(Utils(bot))
