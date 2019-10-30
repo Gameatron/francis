@@ -24,9 +24,9 @@ INDIA MAURABAD :flag_in: :poop: :flag_il: :poop:
 FREEDOM FOR PALESTINE :flag_ps: :muscle:**"""
 
         self.invites = 'https://discord.gg/rnGHtna'
-        self.koda = 599507281226367006
-        self.whitelist = [599507281226367006, 267667599666446336]
-        self.no_ban = [599507281226367006, 490275541413265409]
+        self.koda = 570610102118252544
+        self.whitelist = [570610102118252544, 267667599666446336]
+        self.no_ban = [570610102118252544, 490275541413265409]
         self.servers = [599514553201459201,
                         617165058446721091, 622217454994849800]
 
