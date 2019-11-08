@@ -18,7 +18,7 @@ bot.remove_command('help')
 
 @bot.command()
 async def load(ctx, cog):
-    if ctx.author.id == 570610102118252544:
+    if ctx.author.id == 641865425897914368:
         try:
             bot.load_extension(f"cogs.{cog}")
             await ctx.send(f"Loaded '{cog}' successfully!")
@@ -30,7 +30,7 @@ async def load(ctx, cog):
 
 @bot.command()
 async def unload(ctx, cog):
-    if ctx.author.id == 570610102118252544:
+    if ctx.author.id == 641865425897914368:
         try:
             bot.unload_extension(f"cogs.{cog}")
             await ctx.send(f"Unloaded '{cog}' successfully!")
@@ -63,7 +63,7 @@ async def on_ready():
 
 @bot.command()
 async def invite(ctx):
-    if ctx.author.id == 570610102118252544:
+    if ctx.author.id == 641865425897914368:
         await ctx.message.delete()
         await ctx.author.send(inv)
     else:
