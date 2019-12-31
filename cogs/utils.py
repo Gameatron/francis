@@ -137,16 +137,17 @@ class Utils(commands.Cog):
 
     @commands.command()
     async def readd(self, ctx):
-        if ctx.author.id in self.leaders:
-            c.execute(f"SELECT * FROM conf WHERE id = {ctx.guild.id}")
-            conf = Conf(c.fetchall()[0])
-            role = discget(ctx.guild.roles, id=conf.joinrole)
-            for member in ctx.guild.members:
-                try:
-                    member.add_roles(role) 
-                except:
-                    pass
-            await ctx.send("Done.", delete_after=5)
+        try:
+            if ctx.author.id in self.leaders:
+                c.execute(f"SELECT * FROM conf WHERE id = {ctx.guild.id}")
+                conf = Conf(c.fetchall()[0])
+                role = discget(ctx.guild.roles, id=conf.joinrole)
+                for member in ctx.guild.members:
+                    try:
+                        member.add_roles(role) 
+                    except:
+                        pass
+                await ctx.send("Done.", delete_after=5)
         except:
             await ctx.send("there was an error while i was readding roles.", delete_after=5)
                 
