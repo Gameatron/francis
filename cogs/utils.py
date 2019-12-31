@@ -121,7 +121,7 @@ class Utils(commands.Cog):
                  pass
     
     @commands.command()
-    async def purge(self, ctx):
+    async def ppurge(self, ctx):
         if ctx.author.id in self.leaders:
             for member in ctx.guild.members:
     #            roles = []
