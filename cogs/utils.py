@@ -130,10 +130,15 @@ class Utils(commands.Cog):
                         try:
                             await member.remove_roles(role)
                         except:
-                            pass
+                            await ctx.send(f"I could not remove {member.name}'s role.")
+                        
+                        
+                   
       #              roles.append(role.id)
       #              c.execute("INSERT INTO eco VALUES(member.id, roles, 0)")
             await ctx.send("done, now purge and type >readd to add everyone's roles back.")
+        else:
+            await ctx.send("You do not have permission to use this command")
 
     @commands.command()
     async def readd(self, ctx):
@@ -148,6 +153,8 @@ class Utils(commands.Cog):
                     except:
                         pass
                 await ctx.send("Done.", delete_after=5)
+            else:
+                await ctx.send("You do not have permission to use this command")
         except:
             await ctx.send("there was an error while i was readding roles.", delete_after=5)
                 
