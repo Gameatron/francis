@@ -149,7 +149,7 @@ class Utils(commands.Cog):
                 role = discget(ctx.guild.roles, id=conf.joinrole)
                 for member in ctx.guild.members:
                     try:
-                        member.add_roles(role) 
+                        await member.add_roles(role) 
                     except:
                         pass
                 await ctx.send("Done.", delete_after=5)
