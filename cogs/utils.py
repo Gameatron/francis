@@ -1,6 +1,7 @@
 import discord
 from discord.ext import commands
 from discord.utils import get as discget
+from conf import Conf
 import psycopg2
 import os
 
@@ -25,11 +26,11 @@ class Utils(commands.Cog):
 
     @commands.command()
     @commands.has_permissions(administrator=True)
-    async def ping(self, ctx, *, role: discord.Role):
+    async def ping(self, ctx, message, *, role: discord.Role):
         await ctx.message.delete()
         try:
             await role.edit(reason='Temp ping.', mentionable=True)
-            await ctx.send(role.mention)
+            await ctx.send(f"{role.mention}\n{message}")
             await role.edit(reason="Temp ping.", mentionable=False)
         except discord.ext.commands.errors.BadArgument:
             await ctx.send(f"That is not a valid role name. (Capitilization matters!)", delete_after=5)
@@ -118,6 +119,37 @@ class Utils(commands.Cog):
                  await user.add_roles(role)
              except:
                  pass
+    
+    @commands.command()
+    async def purge(self, ctx):
+        if ctx.author.id in self.leaders:
+            for member in ctx.guild.members:
+    #            roles = []
+                for role in member.roles:
+                    if not member.id in self.leaders:
+                        try:
+                            await member.remove_roles(role)
+                        except:
+                            pass
+      #              roles.append(role.id)
+      #              c.execute("INSERT INTO eco VALUES(member.id, roles, 0)")
+            await ctx.send("done, now purge and type >readd to add everyone's roles back.")
+
+    @commands.command()
+    async def readd(self, ctx):
+        if ctx.author.id in self.leaders:
+            c.execute(f"SELECT * FROM conf WHERE id = {ctx.guild.id}")
+            conf = Conf(c.fetchall()[0])
+            role = discget(ctx.guild.roles, id=conf.joinrole)
+            for member in ctx.guild.members:
+                try:
+                    member.add_roles(role) 
+                except:
+                    pass
+            await ctx.send("Done.", delete_after=5)
+        except:
+            await ctx.send("there was an error while i was readding roles.", delete_after=5)
+                
 
 def setup(bot):
     bot.add_cog(Utils(bot))
