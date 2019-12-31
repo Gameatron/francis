@@ -33,7 +33,7 @@ class Prison(commands.Cog):
                         pass
                 role = discget(ctx.guild.roles, id=conf[0][7])
                 await user.add_roles(role)
-                await ctx.send(f"{user.name} has been imprisoned.", delete_after=5)
+                await ctx.send(f"{user.name} has been imprisoned.")
                 channel = discget(ctx.guild.channels, id=conf[0][8])
                 await channel.send(f"Welcome to prison, {user.mention}.")
                 conn.commit()
