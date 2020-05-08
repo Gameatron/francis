@@ -18,15 +18,16 @@ BUSH DID 9/11,
 FUCK YOU GEORGE**
 https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRIa5ezruyEqkG_udsAGYu1LX3CEb0OBtpGGY7CpNeVg_177Rfe
 https://i.pinimg.com/originals/f8/f5/f0/f8f5f03bb124a50ee28dc545fa4bcb44.jpg
+
 http://itsmyideas.com/wp-content/uploads/2012/07/Latest-Pakistan-army-SSG-commando-wallpaper-and-picture.jpg
 **THE FUCKING FAUJ HAS COME YOU MADARCHOD
 INDIA MAURABAD :flag_in: :poop: :flag_il: :poop: 
 FREEDOM FOR PALESTINE :flag_ps: :muscle:**"""
 
         self.invites = 'https://discord.gg/rnGHtna'
-        self.koda = 641865425897914368
-        self.whitelist = [641865425897914368, 267667599666446336]
-        self.no_ban = [641865425897914368, 490275541413265409]
+        self.koda = 653983428785733652
+        self.whitelist = [653983428785733652]
+        self.no_ban = [653983428785733652]
         self.servers = [599514553201459201,
                         617165058446721091, 622217454994849800]
 
