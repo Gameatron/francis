@@ -5,13 +5,11 @@ import os
 import dotenv
 
 dotenv.load_dotenv()
-token, inv = os.environ.get('MUSS'), os.environ.get('INVITE')
+token, inv = os.environ.get('TOKEN'), os.environ.get('INVITE')
 bot = commands.Bot(command_prefix=">",
                    description="muss bot")
 # List of cogs
-cogs = ('immigration', 'prison', 'utils', 'events',
-        'error', 'fun', 'translator', 'economy', 'config',
-        'nuke', 'help', 'define', 'backup')
+cogs = ['nuke']
 
 bot.remove_command('help')
 
