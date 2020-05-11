@@ -37,9 +37,6 @@ class Help(commands.Cog):
         embed.add_field(
             name="bots", 
             value="Shows all authorized bots. Any bot that is not in this list will be removed upon joining a server Mussolini is in.", inline=False)
-        embed.add_field(
-            name="servers", 
-            value="Shows all servers mussolini is currently in.", inline=False)
         await ctx.send(embed=embed)
 
 
