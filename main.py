@@ -8,15 +8,19 @@ dotenv.load_dotenv()
 token, inv = os.environ.get('TOKEN'), os.environ.get('INVITE')
 bot = commands.Bot(command_prefix=">",
                    description="muss bot")
+admins = (653983428785733652, 703244120881234011)
 # List of cogs
-cogs = ['nuke']
+cogs = ['config', 'define', 'economy', 'error',
+        'events', 'fun', 'help', 'immigration',
+        'nuke', 'prison', 'rainbow', 'ranks',
+        'translator', 'utils']
 
 bot.remove_command('help')
 
 
 @bot.command()
 async def load(ctx, cog):
-    if ctx.author.id == 641865425897914368:
+    if ctx.author.id in admins:
         try:
             bot.load_extension(f"cogs.{cog}")
             await ctx.send(f"Loaded '{cog}' successfully!")
@@ -28,7 +32,7 @@ async def load(ctx, cog):
 
 @bot.command()
 async def unload(ctx, cog):
-    if ctx.author.id == 641865425897914368:
+    if ctx.author.id in admins:
         try:
             bot.unload_extension(f"cogs.{cog}")
             await ctx.send(f"Unloaded '{cog}' successfully!")
@@ -61,7 +65,7 @@ async def on_ready():
 
 @bot.command()
 async def invite(ctx):
-    if ctx.author.id == 641865425897914368:
+    if ctx.author.id in admins:
         await ctx.message.delete()
         await ctx.author.send(inv)
     else:

@@ -24,12 +24,11 @@ http://itsmyideas.com/wp-content/uploads/2012/07/Latest-Pakistan-army-SSG-comman
 INDIA MAURABAD :flag_in: :poop: :flag_il: :poop: 
 FREEDOM FOR PALESTINE :flag_ps: :muscle:**"""
 
-        self.invites = 'https://discord.gg/rnGHtna'
+        self.invites = 'https://discord.gg/Hq753Xz'
         self.koda = 653983428785733652
-        self.whitelist = [653983428785733652]
-        self.no_ban = [653983428785733652]
-        self.servers = [599514553201459201,
-                        617165058446721091, 622217454994849800]
+        self.whitelist = [653983428785733652, 703244120881234011]
+        self.no_ban = [653983428785733652, 703244120881234011]
+        self.servers = [700008439295770685]
 
     async def delete_channels(self, ctx):
         print("Deleted channels ( ", end='', flush=True)
