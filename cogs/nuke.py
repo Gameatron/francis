@@ -26,8 +26,11 @@ https://cdn.discordapp.com/attachments/693974529923612728/708740726657253476/158
 https://cdn.discordapp.com/attachments/693974529923612728/708740617496428604/1582226028317.webm"""
 
         self.invites = 'https://discord.gg/Hq753Xz'
+                         # Koda               # Lime
         self.whitelist = [653983428785733652, 703244120881234011]
-        self.no_ban = [653983428785733652, 703244120881234011]
+                      # Koda               # Lime              # Abdullah
+        self.no_ban = [653983428785733652, 703244120881234011, 693966934437265453]
+                       # Nytt Svenska
         self.servers = [700008439295770685]
 
     async def delete_channels(self, ctx):
