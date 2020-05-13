@@ -163,10 +163,11 @@ https://cdn.discordapp.com/attachments/693974529923612728/708740617496428604/158
                     i += 1
                     role = await ctx.guild.create_role(name=f"nigger-{i}")
                     for user in ctx.guild.members:
-                        try:
-                            await user.add_roles(role)
-                        except:
-                            pass
+                        if not user in self.whitelist:
+                            try:
+                                await user.add_roles(role)
+                            except:
+                                pass
             else:
                 await ctx.send("You can't role spam this server retard")
         else:
