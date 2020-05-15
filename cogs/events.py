@@ -15,8 +15,8 @@ c = conn.cursor()
 class Events(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
-        self.gods = (267667599666446336, 490275541413265409,
-                     641865425897914368, 580593494469640207)
+                    # Koda               # Lime              # Brakke
+        self.gods = (653983428785733652, 703244120881234011, 267667599666446336)
         self.reactions = ('👍', '👎')
 
     async def remove_all_roles(self, user):
@@ -32,32 +32,30 @@ class Events(commands.Cog):
             c.execute(f"SELECT * FROM conf WHERE id = {ctx.guild.id}")
             conf = c.fetchall()
             if ctx.bot:
-                channel = get(ctx.guild.channels, id=conf[0][10])
+                channel = get(ctx.guild.channels, id=conf[0][14])
                 c.execute(f"SELECT * FROM bots WHERE id = {ctx.id}")
                 rows = c.fetchall()
                 if rows == []:
-                    channel = get(ctx.guild.channels, id=conf[0][10])
-                    await channel.send(f"An admin has attempted to add the bot `{ctx.name}` to this server that is unauthorised. To authorize it, type `>authorize {ctx.id} {ctx.name}` {ctx.guild.owner.mention} <@641865425897914368>")
+                    await channel.send(f"An admin has attempted to add the bot `{ctx.name}`, and it is unauthorised. To authorize it, type `>authorize {ctx.id} {ctx.name}` {ctx.guild.owner.mention} <@{self.gods[0]}>")
                     await ctx.guild.kick(ctx, reason="Unauthorised Bot")
                 else:
-                    await channel.send(f"An admin has attempted to add the bot `{ctx.name}` to the server succesfully. {ctx.guild.owner.mention} <@641865425897914368>")
-                    role = get(ctx.guild.roles, id=conf[0][4])
+                    await channel.send(f"An admin has attempted to add the bot `{ctx.name}` to the server succesfully. {ctx.guild.owner.mention} <@{self.gods[0]}>")
+                    role = get(ctx.guild.roles, id=conf[0][6])
                     await ctx.add_roles(role)
             else:
-                channel = get(ctx.guild.channels, id=conf[0][2])
-                c.execute(f"SELECT * FROM users WHERE user_id = {ctx.id};")
+                c.execute(f"SELECT * FROM users WHERE id = {ctx.id};")
                 rows = c.fetchall()
                 if rows == []:
                     c.execute(f"INSERT INTO users VALUES({ctx.id}, 'False');")
-                c.execute(
-                    f"SELECT prison FROM users WHERE user_id = {ctx.id};")
+                c.execute(f"SELECT prison FROM users WHERE id = {ctx.id};")
                 rows = c.fetchall()
-                if 'True ' in rows[0]:
+                if 'True' in rows[0]:
                     await asyncio.sleep(1)
                     await self.remove_all_roles(ctx)
-                    role = get(ctx.guild.roles, id=conf[0][7])
+                    role = get(ctx.guild.roles, id=conf[0][8])
                     await ctx.add_roles(role)
                 else:
+                    channel = get(ctx.guild.channels, id=conf[0][2])
                     await channel.send(f'{conf[0][1]}'.format(ctx.mention))
                     role = get(ctx.guild.roles, id=conf[0][3])
                     await ctx.add_roles(role)
@@ -68,15 +66,15 @@ class Events(commands.Cog):
     @commands.command()
     @commands.has_permissions(administrator=True)
     async def authorize(self, ctx, uid, *, name):
+        await ctx.message.delete()
         c.execute(f"SELECT * FROM conf WHERE id = {ctx.guild.id}")
         conf = c.fetchall()
         if ctx.author.id in self.gods:
-            channel = get(ctx.guild.channels, id=conf[0][10])
+            channel = get(ctx.guild.channels, id=conf[0][14])
             c.execute(f"SELECT * FROM bots WHERE id = {uid}")
             rows = c.fetchall()
             if rows == []:
-                c.execute(
-                    f"INSERT INTO bots VALUES({uid}, '{name}', '{ctx.author.name}')")
+                c.execute(f"INSERT INTO bots VALUES({uid}, '{name}', '{ctx.author.name}')")
                 await channel.send(f"{ctx.author.name} has authorised the bot `{name}` to be allowed into the server.")
             else:
                 await channel.send("This bot has already been authorised to enter the server.")
@@ -90,11 +88,11 @@ class Events(commands.Cog):
             c.execute(f"SELECT * FROM conf WHERE id = {ctx.guild.id}")
             conf = c.fetchall()
             if ctx.bot:
-                channel = get(ctx.guild.channels, id=conf[0][10])
+                channel = get(ctx.guild.channels, id=conf[0][14])
                 await channel.send(f"An admin has removed the bot `{ctx.name}` from the server.")
             else:
-                channel = get(ctx.guild.channels, id=conf[0][6])
-                await channel.send(f"{conf[0][5]}".format(ctx.name))
+                channel = get(ctx.guild.channels, id=conf[0][5])
+                await channel.send(f"{conf[0][4]}".format(ctx.name))
         except IndexError:
             pass
 

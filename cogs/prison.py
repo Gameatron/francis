@@ -25,16 +25,16 @@ class Prison(commands.Cog):
                 conf = c.fetchall()
                 await ctx.message.delete()
                 c.execute(
-                    f"UPDATE users SET prison = 'True' WHERE user_id = {user.id};")
+                    f"UPDATE users SET prison = 'True' WHERE id = {user.id};")
                 for role in user.roles:
                     try:
                         await user.remove_roles(role)
                     except:
                         pass
-                role = discget(ctx.guild.roles, id=conf[0][7])
+                role = discget(ctx.guild.roles, id=conf[0][8])
                 await user.add_roles(role)
                 await ctx.send(f"{user.name} has been imprisoned.")
-                channel = discget(ctx.guild.channels, id=conf[0][8])
+                channel = discget(ctx.guild.channels, id=conf[0][7])
                 await channel.send(f"Welcome to prison, {user.mention}.")
                 conn.commit()
             else:
@@ -50,13 +50,13 @@ class Prison(commands.Cog):
         conf = c.fetchall()
         await ctx.message.delete()
         c.execute(
-            f"UPDATE users SET prison = 'False' WHERE user_id = {user.id};")
-        role = discget(ctx.guild.roles, id=conf[0][7])
+            f"UPDATE users SET prison = 'False' WHERE id = {user.id};")
+        role = discget(ctx.guild.roles, id=conf[0][8])
         await user.remove_roles(role)
         role = discget(ctx.guild.roles, id=conf[0][3])
         await user.add_roles(role)
         await ctx.send(f"You have been freed, {user.mention}.", delete_after=5)
-        channel = discget(ctx.guild.channels, id=conf[0][14])
+        channel = discget(ctx.guild.channels, id=conf[0][13])
         await channel.send(f"You have been freed, {user.mention}.", delete_after=10)
         conn.commit()
 
