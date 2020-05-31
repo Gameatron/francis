@@ -12,7 +12,7 @@ admins = (653983428785733652, 703244120881234011)
 # List of cogs
 cogs = ['config', 'define', 'economy', 'error',
         'events', 'fun', 'help', 'immigration',
-        'nuke', 'prison', 'rainbow', 'ranks',
+        'nuke', 'prison', 'rainbow',
         'translator', 'utils']
 
 bot.remove_command('help')
@@ -72,8 +72,8 @@ async def invite(ctx):
         await ctx.send("You do not have permission to use this command.")
 
 # immediately stop the bot
-@bot.command(aliases=['restart'])
-async def stop(ctx):
+@bot.command()
+async def restart(ctx):
     await bot.logout()
 
 # Starts the bot

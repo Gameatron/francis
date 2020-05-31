@@ -18,7 +18,7 @@ class Prison(commands.Cog):
 
     @commands.command()
     @commands.has_permissions(administrator=True)
-    async def imprison(self, ctx, user: discord.Member):
+    async def imprison(self, ctx, user: discord.Member, *, reason=None):
         if not ctx.author == user:
             if not ctx.author.top_role.position <= user.top_role.position:
                 c.execute(f"SELECT * FROM conf WHERE id = {ctx.guild.id}")
@@ -35,7 +35,10 @@ class Prison(commands.Cog):
                 await user.add_roles(role)
                 await ctx.send(f"{user.name} has been imprisoned.")
                 channel = discget(ctx.guild.channels, id=conf[0][7])
-                await channel.send(f"Welcome to prison, {user.mention}.")
+                if reason == None:
+                    await channel.send(f"Welcome to prison, {user.mention}.")
+                else:
+                    await channel.send(f"Welcome to prison, {user.mention}.\nReason: {reason}")
                 conn.commit()
             else:
                 await ctx.send("You cannot imprison someone with a higher or equal top role.")
@@ -54,7 +57,10 @@ class Prison(commands.Cog):
         role = discget(ctx.guild.roles, id=conf[0][8])
         await user.remove_roles(role)
         role = discget(ctx.guild.roles, id=conf[0][3])
-        await user.add_roles(role)
+        try:
+            await user.add_roles(role)
+        except AttributeError:
+            pass
         await ctx.send(f"You have been freed, {user.mention}.", delete_after=5)
         channel = discget(ctx.guild.channels, id=conf[0][13])
         await channel.send(f"You have been freed, {user.mention}.", delete_after=10)

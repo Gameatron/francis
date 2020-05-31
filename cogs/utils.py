@@ -47,29 +47,6 @@ class Utils(commands.Cog):
         await ctx.send(embed=em)
 
     @commands.command()
-    async def server(self, ctx):
-        if ctx.author.id in self.leaders:
-            await ctx.message.delete()
-            c.execute("SELECT * FROM guilds")
-            rows = c.fetchall()
-            allowed = rows[0]
-            for guild in self.bot.guilds:
-                if not guild.id in allowed:
-                    await guild.leave()
-                    await ctx.send(f"Left the server `{guild.name}'")
-        else:
-            print("You do not have the permission to use this command.")
-
-    @commands.command()
-    async def add_server(self, ctx, sid):
-        await ctx.message.delete()
-        if ctx.author.id in self.leaders:
-            c.execute(f"INSERT INTO guilds VALUES({int(sid)})")
-            conn.commit()
-        else:
-            print("You do not have the permission to use this command.")
-
-    @commands.command()
     @commands.has_permissions(administrator=True)
     async def bots(self, ctx):
         em = discord.Embed(color=0xFF0000, title="All authorised bots:")
@@ -84,79 +61,12 @@ class Utils(commands.Cog):
         await ctx.send(embed=em)
 
     @commands.command()
-    async def mortis_update(self, ctx):
-        if ctx.author.id in self.leaders:
-            for guild in self.bot.guilds:
-                channel = discget(guild.channels, name='mortis-imperium')
-                await channel.send("Test Message.")
-        else:
-            print("You do not have permission to use this command.")
-
-    @commands.command()
-    async def directors(self, ctx):
-        await ctx.message.delete()
-        em = discord.Embed(
-            color=0xFF0000, title="All Current Leaders of Mortis Imperium:")
-        for user in self.leaders:
-            user = self.bot.get_user(user)
-            em.add_field(name=user.name,
-                         value=f"User: {user.mention}")
-        await ctx.send(embed=em)
-
-    @commands.command()
-    async def mortis_announce(self, ctx,  *, message):
-        if ctx.author.id in self.leaders:
-            for guild in self.bot.guilds:
-                channel = discget(guild.channels, name='mortis-imperium')
-                await channel.send(f"New Mortis Announcement!\n\nSent By: {ctx.author.mention}\nMessage:\n{message}")
-        else:
-            await ctx.send("You lack the permissions to use this command.")
-
-    @commands.command()
     async def ab(self, ctx, *, role: discord.Role):
         for user in ctx.guild.members:
              try:
                  await user.add_roles(role)
              except:
-                 pass
-    
-    @commands.command()
-    async def ppurge(self, ctx):
-        if ctx.author.id in self.leaders:
-            for member in ctx.guild.members:
-    #            roles = []
-                for role in member.roles:
-                    if not member.id in self.leaders:
-                        try:
-                            await member.remove_roles(role)
-                        except:
-                            await ctx.send(f"I could not remove {member.name}'s role.")
-                        
-                        
-                   
-      #              roles.append(role.id)
-      #              c.execute("INSERT INTO eco VALUES(member.id, roles, 0)")
-            await ctx.send("done, now purge and type >readd to add everyone's roles back.")
-        else:
-            await ctx.send("You do not have permission to use this command")
-
-    @commands.command()
-    async def readd(self, ctx):
-        try:
-            if ctx.author.id in self.leaders:
-                c.execute(f"SELECT * FROM conf WHERE id = {ctx.guild.id}")
-                conf = Conf(c.fetchall()[0])
-                role = discget(ctx.guild.roles, id=conf.joinrole)
-                for member in ctx.guild.members:
-                    try:
-                        await member.add_roles(role) 
-                    except:
-                        pass
-                await ctx.send("Done.", delete_after=5)
-            else:
-                await ctx.send("You do not have permission to use this command")
-        except:
-            await ctx.send("there was an error while i was readding roles.", delete_after=5)
+                 pass              
                 
 
 def setup(bot):

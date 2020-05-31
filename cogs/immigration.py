@@ -18,11 +18,14 @@ class Immigration(commands.Cog):
     @commands.command()
     @commands.has_permissions(administrator=True)
     async def accept(self, ctx, user: discord.Member):
+        await ctx.message.delete()
         c.execute(f"SELECT * FROM conf WHERE id = {ctx.guild.id}")
         conf = c.fetchall()
-        print(conf)
         role = discget(ctx.guild.roles, id=conf[0][3])
-        await user.remove_roles(role)
+        try:
+            await user.remove_roles(role)
+        except AttributeError:
+            pass
         role = discget(ctx.guild.roles, id=conf[0][12])
         await user.add_roles(role)
         await self.clear(ctx, 1)
