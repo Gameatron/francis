@@ -15,6 +15,15 @@ class Prison(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
         self.free_roles = ('Immigrant', 'Watchlist')
+    
+    def pembed(self, ctx, prisoner, title, reason):
+        embed = discord.Embed(title=title, color=0xFF0000)
+        embed.add_field(name="Moderator:", value=ctx.author.name)
+        embed.add_field(name="Target:", value=prisoner.name)
+        if not reason == None:
+            embed.add_field(name="Reason:", value=reason)
+        embed.set_footer(text="work in progress, may not show up properly. -Koda")
+        return embed
 
     @commands.command()
     @commands.has_permissions(administrator=True)
@@ -39,6 +48,8 @@ class Prison(commands.Cog):
                     await channel.send(f"Welcome to prison, {user.mention}.")
                 else:
                     await channel.send(f"Welcome to prison, {user.mention}.\nReason: {reason}")
+                log = discget(ctx.guild.channels, id=conf[0][14])
+                await log.send(embed=self.pembed(ctx, user, "Imprisonment", reason))
                 conn.commit()
             else:
                 await ctx.send("You cannot imprison someone with a higher or equal top role.")
