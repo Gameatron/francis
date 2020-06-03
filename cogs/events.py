@@ -12,6 +12,7 @@ conn = psycopg2.connect(os.getenv("DATABASE_URL"), sslmode='require')
 c = conn.cursor()
 
 
+
 class Events(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
@@ -25,6 +26,29 @@ class Events(commands.Cog):
                 await user.remove_roles(role)
             except:
                 pass
+    
+    async def get_chan(self, ctx, uid):
+        chan = get(ctx.guild.channels, id=uid)
+        return chan
+
+    async def update_chan(self, ctx):
+            o, i = self.memcount(ctx)
+            ver, uver, total = get(ctx.guild.channels, id=717121186068430948), get(ctx.guild.channels, id=717121228351078611), get(ctx.guild.channels, id=717124441632538734)
+            await ver.edit(name=f"Verified Members: {i}")
+            await uver.edit(name=f"Unverified Members: {o}")
+            await total.edit(name=f"Total Members: {o+i}")
+
+    def memcount(self, ctx):
+        c.execute(f"SELECT * FROM conf WHERE id = {ctx.guild.id}")
+        conf = c.fetchall()
+        i, o = 0, 0
+        for mem in ctx.guild.members:
+            ver = get(ctx.guild.roles, id=conf[0][12])
+            if ver in mem.roles:
+                i += 1
+            else:
+                o += 1
+        return (o, i)
 
     @commands.Cog.listener()
     async def on_member_join(self, ctx):
@@ -57,9 +81,13 @@ class Events(commands.Cog):
                 else:
                     channel = get(ctx.guild.channels, id=conf[0][2])
                     await channel.send(f'{conf[0][1]}'.format(ctx.mention))
-                    role = get(ctx.guild.roles, id=conf[0][3])
-                    await ctx.add_roles(role)
+                    try:
+                        role = get(ctx.guild.roles, id=conf[0][3])
+                        await ctx.add_roles(role)
+                    except AttributeError:
+                        pass
                 conn.commit()
+            await self.update_chan(ctx)
         except IndexError:
             pass
 
@@ -93,6 +121,7 @@ class Events(commands.Cog):
             else:
                 channel = get(ctx.guild.channels, id=conf[0][5])
                 await channel.send(f"{conf[0][4]}".format(ctx.name))
+            await self.update_chan(ctx)  
         except IndexError:
             pass
 

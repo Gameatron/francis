@@ -1,13 +1,11 @@
 import discord
 from discord.ext import commands
 from discord.utils import get as discget
-from conf import Conf
 import psycopg2
 import os
 
 conn = psycopg2.connect(os.getenv("DATABASE_URL"), sslmode='require')
 c = conn.cursor()
-
 
 class Utils(commands.Cog):
     def __init__(self, bot):
