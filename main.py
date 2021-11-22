@@ -12,7 +12,7 @@ admins = (653983428785733652, 703244120881234011)
 # List of cogs
 cogs = ['config', 'define', 'economy', 'error',
         'events', 'fun', 'help', 'immigration',
-        'nuke', 'prison', 'rainbow',
+        'prison', 'rainbow',
         'translator', 'utils']
 
 bot.remove_command('help')
