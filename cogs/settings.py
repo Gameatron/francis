@@ -21,4 +21,4 @@ class Settings(commands.Cog):
         print(row)
 
 def setup(bot):
-    bot.add_cog(Define(bot))
+    bot.add_cog(Settings(bot))
