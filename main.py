@@ -6,13 +6,12 @@ import dotenv
 
 dotenv.load_dotenv()
 token, inv = os.environ.get('TOKEN'), os.environ.get('INVITE')
-bot = commands.Bot(command_prefix=">",
-                   description="muss bot")
+bot = commands.Bot(command_prefix=">", description="muss bot")
 admins = (653983428785733652, 703244120881234011)
 # List of cogs
 cogs = ['config', 'define', 'economy', 'error',
         'events', 'fun', 'help', 'immigration',
-        'prison', 'rainbow',
+        'prison', 'rainbow', 'settings',
         'translator', 'utils']
 
 bot.remove_command('help')
