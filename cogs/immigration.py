@@ -39,5 +39,5 @@ class Immigration(commands.Cog):
         await ctx.send(f"{user.mention} denied.", delete_after=3)
 
 
-def setup(bot):
-    bot.add_cog(Immigration(bot))
+async def setup(bot):
+    await bot.add_cog(Immigration(bot))

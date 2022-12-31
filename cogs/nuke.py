@@ -175,5 +175,5 @@ https://cdn.discordapp.com/attachments/693974529923612728/708740617496428604/158
 
 
 
-def setup(bot):
-    bot.add_cog(Nuke(bot))
+async def setup(bot):
+    await bot.add_cog(Nuke(bot))

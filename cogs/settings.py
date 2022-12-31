@@ -20,5 +20,5 @@ class Settings(commands.Cog):
         row = c.fetchall()
         print(row)
 
-def setup(bot):
-    bot.add_cog(Settings(bot))
+async def setup(bot):
+    await bot.add_cog(Settings(bot))

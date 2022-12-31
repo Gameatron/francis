@@ -33,5 +33,5 @@ class Rainbow(commands.Cog):
         self.cock = 'no'
 
      
-def setup(bot):
-    bot.add_cog(Rainbow(bot))
+async def setup(bot):
+    await bot.add_cog(Rainbow(bot))

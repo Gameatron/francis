@@ -17,5 +17,5 @@ class Define(commands.Cog):
             await ctx.send(f"Word ({word}) not found.")
 
 
-def setup(bot):
-    bot.add_cog(Define(bot))
+async def setup(bot):
+    await bot.add_cog(Define(bot))

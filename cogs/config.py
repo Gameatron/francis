@@ -25,5 +25,5 @@ class Config(commands.Cog):
         await ctx.send(embed=conf.embed(ctx, self.bot))
 
 
-def setup(bot):
-    bot.add_cog(Config(bot))
+async def setup(bot):
+    await bot.add_cog(Config(bot))

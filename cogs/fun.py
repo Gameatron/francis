@@ -25,6 +25,7 @@ class Fun(commands.Cog):
 
     @commands.command()
     async def greece(self, ctx):
+        await ctx.message.delete()
         await asyncio.sleep(1)
         await ctx.send("Can I invade Greece?")
         msg = await self.bot.wait_for("message", timeout=30)
@@ -52,5 +53,5 @@ class Fun(commands.Cog):
             await ctx.send("That is not a proper user mention.")
 
 
-def setup(bot):
-    bot.add_cog(Fun(bot))
+async def setup(bot):
+    await bot.add_cog(Fun(bot))
